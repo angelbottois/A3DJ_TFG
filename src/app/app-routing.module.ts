@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import { CatalogoComponent } from './components/catalogo/catalogo.component';
+import { SociosComponent } from './components/socios/socios.component';
+
 
 const routes: Routes = [
   {
@@ -10,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'catalogo',
-    component: HomeComponent,
+    component: CatalogoComponent,
   },
   {
     path: 'citas',
@@ -26,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: 'socios',
-    component: HomeComponent,
+    component: SociosComponent,
   },
   {
     //Any other link will be redirected to the login website
