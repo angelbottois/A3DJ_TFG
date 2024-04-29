@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
     this.renderer.setSize(200, 200);
     logo?.appendChild(this.renderer.domElement);
 
-    const geometry = new THREE.BoxGeometry(2, 2, 2);
+    const geometry = new THREE.BoxGeometry(3, 3, 3);
     const material = new THREE.MeshBasicMaterial( {color: 0X60A5FA} );
 
     const cube = new THREE.Mesh(geometry, material);

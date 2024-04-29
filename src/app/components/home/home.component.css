@@ -1,0 +1,22 @@
+.hidden{
+    display: none;
+}
+.info{
+    opacity: 0;
+    position:fixed;
+    bottom: 30px;
+    right: 30px; 
+    animation: aparecer 2s ease-out forwards;
+}
+.info.mostrar{
+    opacity: 1;
+}
+
+@keyframes aparecer {
+    from {
+      opacity: 0; /* Opacidad al principio de la animación */
+    }
+    to {
+      opacity: 1; /* Opacidad al final de la animación */
+    }
+  }
