@@ -1,22 +1,19 @@
 <header class="h-[100px] mb-[30px]">
-        <div class="grid grid-cols-1 justify-items-center">
-            <img src="#" alt="logo">
+        <div class="logo grid grid-cols-1 justify-items-center">
         </div>
         <nav>
             <ul class="grid grid-cols-5 justify-items-center">
-                <li><a href="home">Inicio</a></li>
-                <li><a href="catalogo">Catálogo</a></li>
-                <li><a href="">Reserva de Citas</a></li>
-                <li><a href="socios">Planes de socios</a></li>
-                <li><a href="">Sobre nosotros</a></li>
+                <li class="btn-nav"><a href="home">Inicio</a></li>
+                <li class="btn-nav"><a href="catalogo">Catálogo</a></li>
+                <li class="btn-nav"><a href="">Reserva de Citas</a></li>
+                <li class="btn-nav"><a href="socios">Planes de socios</a></li>
+                <li class="btn-nav"><a href="">Sobre nosotros</a></li>
             </ul>
         </nav>
         <div class="grid justify-items-center">
-            <p class="cursor-pointer">Sign Up <img src="../../assets/img/icons/arrow.svg" alt="flecha" width="20px" class="inline ml-[5px]"></p>
-            <span class="login-panel hidden p-[10px] w-[250px] h-[150px] border-[2px] border-black rounded-[10px]">
-                <p>¿Todavía no tienes cuenta?</p>
-                <p class="my-[10px]"><a href="#" class="text-blue-500">Registrate</a></p>
-                <button class="bg-blue-300 rounded-[10px] px-[20px] py-[10px] w-[100%]">Login</button>
-            </span>
+            <button class="px-[20px] py-[10px] bg-blue-300 rounded-[5px]" (click)="switchModal()">Inicia Sesión</button>
         </div>
 </header>
+<div *ngIf="modalSwitch == true">
+    <app-modal></app-modal>
+</div>

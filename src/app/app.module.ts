@@ -11,6 +11,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { CitasComponent } from './components/citas/citas.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +24,13 @@ import { CitasComponent } from './components/citas/citas.component';
     PerfilComponent,
     PanelAdminComponent,
     HomeComponent,
-    CitasComponent
+    CitasComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
