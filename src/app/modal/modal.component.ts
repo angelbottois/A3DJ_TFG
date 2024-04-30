@@ -8,6 +8,8 @@ import { ModalService } from '../services/modal/modal.service';
 })
 export class ModalComponent implements OnInit {
 
+  estado: string = "l"; 
+
   constructor(private modalS: ModalService) { }
 
   ngOnInit(): void {
@@ -17,4 +19,13 @@ export class ModalComponent implements OnInit {
     this.modalS.$modal.emit(false);
   }
 
+  p(){
+    this.estado = "p";
+  }
+  r(){
+    this.estado = "r";
+  }
+  l(){
+    this.estado = "l";
+  }
 }
