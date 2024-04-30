@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalComponent } from './modal/modal.component';
+import { NosotrosComponent } from './components/nosotros/nosotros.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ModalComponent } from './modal/modal.component';
     HomeComponent,
     CitasComponent,
     ModalComponent,
+    NosotrosComponent,
   ],
   imports: [
     BrowserModule,

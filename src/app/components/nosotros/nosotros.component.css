@@ -1,0 +1,11 @@
+.pla{
+    background-image: url('../../../assets/img/nosotros/pla.webp');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.petg{
+    background-image: url('../../../assets/img/nosotros/petg.avif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 400px;
+}
