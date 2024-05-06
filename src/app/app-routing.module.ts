@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { SociosComponent } from './components/socios/socios.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
+import { CitasComponent } from './components/citas/citas.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: 'citas',
-    component: HomeComponent,
+    component: CitasComponent,
   },
   {
     path: 'perfil',
