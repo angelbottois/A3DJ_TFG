@@ -1,0 +1,14 @@
+form{
+    background-color: rgb(201, 215, 223);
+}
+#fecha{
+    background-color: rgb(243, 243, 243);
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    padding: 15px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    border-radius: 10px;
+}

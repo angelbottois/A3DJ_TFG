@@ -1,1 +1,13 @@
-<p>citas works!</p>
+<div class="grid justify-center">
+    <form action="" class="grid items-center w-[600px] h-[600px] px-[50px] border rounded-[5px]">
+        <div>
+            <label for="motivo" class="text-[24px]">Motivo por el cuál quieres reservar una cita</label>
+            <textarea type="text" name="motivo" id="motivo" class="max-h-[250px] min-h-[50px] mt-5 p-4 border rounded-[5px] w-[100%]" placeholder="Escriba aqui sus dudas o necesidades..."></textarea>
+        </div>
+        <div>
+            <label for="fecha" class="text-[24px]">Selecciona una fecha</label><br>
+            <input type='datetime-local' name='fecha' id="fecha">
+        </div>
+        <input type="submit" value="Enviar solicitud" class="mt-[20px] cursor-pointer text-[20px] bg-blue-300 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-400">
+    </form>
+</div>
