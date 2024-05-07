@@ -27,7 +27,7 @@ nav ul li a{
 .btn-nav:hover:before {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border-color: #000;
+    border-color: white;
     -webkit-transition: width 350ms ease-in-out;
     transition: width 250ms ease-in-out;
     width: 100%;

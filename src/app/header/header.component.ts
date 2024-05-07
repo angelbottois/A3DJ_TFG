@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
     // const geometry = new THREE.BoxGeometry(3, 3, 3);
     const geometry = new THREE.IcosahedronGeometry(2,1);
     
-    const material = new THREE.MeshBasicMaterial( {color: 0X63A5FA} );
+    const material = new THREE.MeshBasicMaterial( {color: 0X3B82F6} );
 
     const cube = new THREE.Mesh(geometry, material);
     this.logoScene.add(cube);
