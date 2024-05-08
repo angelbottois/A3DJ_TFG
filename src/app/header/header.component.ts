@@ -10,6 +10,7 @@ import { ModalService } from '../services/modal/modal.service';
 export class HeaderComponent implements OnInit {
 
   modalSwitch: boolean = false;
+  sesion: boolean = true;
 
   logoScene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(75, 200 / 200, 0.1, 1000);
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit {
     this.modalS.$modal.subscribe((valor)=>{this.modalSwitch = valor});
     this.createLogo();
   }
+
 
   switchModal(): void{
     this.modalSwitch = true;
@@ -62,5 +64,10 @@ export class HeaderComponent implements OnInit {
     //     animate();
     //   }
     // });
+  }
+
+  cerrarSesion() :void{
+    this.sesion = false;
+
   }
 }

@@ -1,6 +1,5 @@
 <header class="h-[100px] mb-[30px]">
-        <div class="logo grid grid-cols-1 justify-items-center">
-        </div>
+        <div class="logo grid grid-cols-1 justify-items-center"></div>
         <nav>
             <ul class="grid grid-cols-5 justify-items-center">
                 <li class="btn-nav"><a href="home">Inicio</a></li>
@@ -10,8 +9,12 @@
                 <li class="btn-nav"><a href="nosotros">Sobre nosotros</a></li>
             </ul>
         </nav>
-        <div class="grid justify-items-center">
+        <div *ngIf="sesion == false" class="grid justify-items-center">
             <button class="text-[18px] px-[25px] py-[15px] shadow-xl bg-blue-500 rounded-[5px] hover:bg-blue-600" (click)="switchModal()">Inicia Sesión</button>
+        </div>
+        <div *ngIf="sesion == true" class="w-[500px] grid justify-items-center grid-cols-2">
+            <button class="w-40 text-[16px] px-[25px] py-[15px] shadow-xl bg-blue-500 rounded-[5px] hover:bg-blue-600"><a href="catalogo" class="text-[15px] font-medium">Perfil Personal</a></button>
+            <button class="w-40 text-[16px] px-[25px] py-[15px] shadow-xl bg-red-500 rounded-[5px] hover:bg-red-600" (click)="cerrarSesion()">Cerrar Sesión</button>
         </div>
 </header>
 <div *ngIf="modalSwitch == true">
