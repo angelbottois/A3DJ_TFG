@@ -1,12 +1,18 @@
 <div class="grid text-black justify-center">
-    <form action="" class="grid items-center w-[600px] h-[600px] px-[50px] shadow-xl rounded-[5px]">
+    <form action="" class="grid items-center w-[600px] h-[600px] px-[50px] shadow-xl rounded-[10px]">
         <div>
             <label for="motivo" class="text-[24px]">Motivo por el cuál quieres reservar una cita</label>
-            <textarea type="text" name="motivo" id="motivo" class="max-h-[250px] shadow-xl min-h-[50px] mt-5 p-4 border rounded-[5px] w-[100%]" placeholder="Escriba aqui sus dudas o necesidades..."></textarea>
+            <textarea type="text" name="motivo" id="motivo" class="max-h-[250px] shadow-xl min-h-[50px] mt-5 p-4 border rounded-[10px] w-[100%]" placeholder="Escriba aqui sus dudas o necesidades..."></textarea>
         </div>
         <div>
             <label for="fecha" class="text-[24px]">Selecciona una fecha</label><br>
-            <input type='datetime-local' name='fecha' id="fecha" class="shadow-xl">
+            <input type='date' name='fecha' id="fecha" class="shadow-xl">
+        </div>
+        <div>
+            <label for="hora" class="text-[24px]">Selecciona una hora disponible</label><br>
+            <select name="hora" id="hora" class="mt-[15px] rounded-[10px] p-3 w-[100%]">
+                <option value="algo">horas</option>
+            </select>
         </div>
         <input type="submit" value="Enviar solicitud" class="text-white mt-[20px] shadow-xl cursor-pointer text-[20px] bg-blue-500 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-600">
     </form>
