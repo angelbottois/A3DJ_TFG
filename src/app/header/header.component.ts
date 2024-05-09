@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import * as THREE from 'three';
 import { ModalService } from '../services/modal/modal.service';
 import { SesionService } from '../services/sesion/sesion.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header',
@@ -12,15 +13,21 @@ import { SesionService } from '../services/sesion/sesion.service';
 export class HeaderComponent implements OnInit {
 
   modalSwitch: boolean = false;
-  sesion: boolean = false;
+  iniciado: string = "";
   
   logoScene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(75, 200 / 200, 0.1, 1000);
   renderer = new THREE.WebGLRenderer( {alpha: true} );
 
-  constructor(private modalS: ModalService, private sesionS: SesionService, private apiS: ApiService) { }
+  constructor(private modalS: ModalService, private sesionS: SesionService, private apiS: ApiService, private cookieS: CookieService) { }
 
   ngOnInit(): void {
+    if(!this.cookieS.get("iniciado")){
+      this.cookieS.set("iniciado", "false");
+      this.iniciado = this.cookieS.get("iniciado");
+    }else{
+      this.iniciado = this.cookieS.get("iniciado");
+    }
     this.modalS.$modal.subscribe((valor)=>{this.modalSwitch = valor});
     this.createLogo();
   }
@@ -61,6 +68,6 @@ export class HeaderComponent implements OnInit {
   }
 
   cerrarSesion() :void{
-    this.sesion = false;
+    this.cookieS.set("iniciado", "false");
   }
 }

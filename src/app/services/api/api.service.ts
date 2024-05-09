@@ -15,8 +15,8 @@ export class ApiService {
     const url = `${this.apiUrl}/iniciarSesion/${correo}/${pass}`;
     return this.http.get(url);
   }
-  register(data : any){
-    const url = `${this.apiUrl}/cliente`;
+  register(data : any): Observable<any>{    
+    const url = `${this.apiUrl}/cliente`;    
     return this.http.post(url, data)
   }
   obtenerPiezas(): Observable<any> {

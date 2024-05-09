@@ -9,10 +9,10 @@
                 <li class="btn-nav"><a href="nosotros">Sobre nosotros</a></li>
             </ul>
         </nav>
-        <div *ngIf="sesion == false" class="w-[400px] grid justify-items-center">
+        <div *ngIf="iniciado == 'false'" class="w-[400px] grid justify-items-center">
             <button class="text-[18px] px-[25px] py-[15px] shadow-xl bg-blue-500 rounded-[5px] hover:bg-blue-600" (click)="switchModal()">Inicia Sesión</button>
         </div>
-        <div *ngIf="sesion == true" class="w-[400px] grid justify-items-center grid-cols-2">
+        <div *ngIf="iniciado == 'true'" class="w-[400px] grid justify-items-center grid-cols-2">
             <button class="w-40 text-[16px] px-[25px] py-[15px] shadow-xl bg-blue-500 rounded-[5px] hover:bg-blue-600"><a href="perfil" class="text-[15px] font-medium">Perfil Personal</a></button>
             <button class="w-40 text-[16px] px-[25px] py-[15px] shadow-xl bg-red-500 rounded-[5px] hover:bg-red-600" (click)="cerrarSesion()">Cerrar Sesión</button>
         </div>

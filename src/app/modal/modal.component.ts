@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalService } from '../services/modal/modal.service';
 import { ApiService } from '../services/api/api.service';
 import { Cliente, Supervisor } from '../interfaces/_interfacesUsuario';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-modal',
@@ -11,6 +12,11 @@ import { Cliente, Supervisor } from '../interfaces/_interfacesUsuario';
 export class ModalComponent implements OnInit {
 
   estado: string = "l"; 
+  iniciado: string = "";
+  passError: string = "";
+  nameError: string = "";
+  apeError: string = "";
+  mailError: string = "";
 
   currentUserC :Cliente = {
     idUsuario: "",
@@ -34,9 +40,15 @@ export class ModalComponent implements OnInit {
     administrador: false
   }
 
-  constructor(private modalS: ModalService, private apiS: ApiService) { }
+  constructor(private modalS: ModalService, private apiS: ApiService, private cookieS: CookieService) { }
 
   ngOnInit(): void {
+    if(!this.cookieS.get("iniciado")){
+      this.cookieS.set("iniciado", "false");
+      this.iniciado = this.cookieS.get("iniciado");
+    }else{
+      this.iniciado = this.cookieS.get("iniciado");
+    }
   }
 
   registrarCliente(){
@@ -47,18 +59,32 @@ export class ModalComponent implements OnInit {
     const repPass: HTMLInputElement | null = document.querySelector('#repPassword');
     
     if(nombre && apellidos && correo && pass && repPass && pass.value==repPass.value){
-      let data = {
-        nombre: nombre.value,
-        apellidos: apellidos.value,
-        correo: correo.value,
-        pass: pass.value
-      }
-      this.apiS.register(data);
-    }else{
-      console.log("Contraseñas diferentes");
+      if(nombre.value != ""){
+        if(apellidos.value != ""){
+          if(correo.value != ""){
+            let data = JSON.stringify({nombre: nombre.value, apellidos: apellidos.value, pass: pass.value, correo: correo.value});
       
+            this.apiS.register(data).subscribe(
+              (response: any) => {
+                
+              }
+            );
+          }else{
+            this.mailError = "Correo no válido";
+            this.borrarValorError();
+          }
+        }else{
+          this.apeError = "Apellidos no válidos";
+          this.borrarValorError();
+        }
+      }else{
+        this.nameError = "Nombre no válido";
+        this.borrarValorError();
+      }
+    }else{
+      this.passError = "Las contraseñas deben coincidir";   
+      this.borrarValorError();
     }
-
   }
 
   iniciarSesion(){
@@ -66,19 +92,26 @@ export class ModalComponent implements OnInit {
     const pass: HTMLInputElement | null = document.querySelector('#password');
     
     if(correo && pass){
-      // this.apiS.login().subscribe()
-      
-      
-
+      if(correo.value != ""){
+        if(pass.value != ""){
+          this.apiS.login(correo.value, pass.value).subscribe((response: any)=>{
+            if(response == null){
+              this.passError = "Credenciales incorrectas";
+              this.borrarValorError();
+            }else{
+              this.cookieS.set("iniciado", "true");
+            }
+          })
+        }else{
+          this.passError = "Contraseña no válida";
+          this.borrarValorError();
+        }
+      }else{
+        this.mailError = "Correo no válido";
+        this.borrarValorError();
+      }
     }
   }
-
-
-
-
-
-
-
 
 
   closeModal(){
@@ -92,5 +125,13 @@ export class ModalComponent implements OnInit {
   }
   l(){
     this.estado = "l";
+  }
+  borrarValorError(){
+    setTimeout(() => {
+      this.passError = "";
+      this.nameError = "";
+      this.apeError = "";
+      this.mailError = "";
+    }, 2000);
   }
 }
