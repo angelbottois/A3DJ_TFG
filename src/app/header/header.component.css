@@ -1,6 +1,9 @@
 header{
     display: grid;
+    width: 1900px;
     grid-template-columns: repeat(3, auto);
+    justify-content: center;
+    gap: 100px;
     align-items: center;
     margin-bottom: 100px;
 }

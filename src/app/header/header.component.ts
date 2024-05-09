@@ -1,6 +1,8 @@
+import { ApiService } from './../services/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import * as THREE from 'three';
 import { ModalService } from '../services/modal/modal.service';
+import { SesionService } from '../services/sesion/sesion.service';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +12,13 @@ import { ModalService } from '../services/modal/modal.service';
 export class HeaderComponent implements OnInit {
 
   modalSwitch: boolean = false;
-  sesion: boolean = true;
-
+  sesion: boolean = false;
+  
   logoScene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(75, 200 / 200, 0.1, 1000);
   renderer = new THREE.WebGLRenderer( {alpha: true} );
 
-  constructor(private modalS: ModalService) { }
+  constructor(private modalS: ModalService, private sesionS: SesionService, private apiS: ApiService) { }
 
   ngOnInit(): void {
     this.modalS.$modal.subscribe((valor)=>{this.modalSwitch = valor});
@@ -56,18 +58,9 @@ export class HeaderComponent implements OnInit {
       this.renderer.render(this.logoScene, this.camera);
     };
     animate();
-
-    // const loader = new THREE.TextureLoader();
-    // loader.load('../../assets/img/logo.png', (texture)=>{
-    //   if(texture){
-    //     material.map = texture;
-    //     animate();
-    //   }
-    // });
   }
 
   cerrarSesion() :void{
     this.sesion = false;
-
   }
 }

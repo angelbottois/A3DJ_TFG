@@ -1,7 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @tailwind base;
 body{
-    margin: 0 auto;
+    display: grid;
+    justify-content: center;
     box-sizing: border-box;
     background-color: #5a6e81;
     color: white;
