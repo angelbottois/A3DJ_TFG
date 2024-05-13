@@ -1,5 +1,12 @@
+.uno{
+    animation: aparecer 0.5s ease-out forwards;
+}
+.dos{
+    animation: aparecer 0.6s ease-out forwards;
+}
 .primero{
     margin-bottom: 100px;
+    animation: aparecer 0.7s ease-out forwards;
 }
 .pla{
     background-image: url('../../../assets/img/nosotros/pla.webp');
@@ -12,3 +19,11 @@
     background-repeat: no-repeat;
     background-size: 400px;
 }
+@keyframes aparecer {
+    from {
+      opacity: 0; /* Opacidad al principio de la animación */
+    }
+    to {
+      opacity: 1; /* Opacidad al final de la animación */
+    }
+  }
