@@ -6,6 +6,7 @@ import { SociosComponent } from './components/socios/socios.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: HomeComponent,
+    component: PanelAdminComponent,
   },
   {
     path: 'socios',

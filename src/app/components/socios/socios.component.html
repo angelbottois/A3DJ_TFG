@@ -1,19 +1,10 @@
 <div class="grid justify-items-center">
     <h1 class="text-center text-[45px] mb-[20px]">Planes de socios</h1>
     <div class="planes grid grid-cols-3 gap-[50px]">
-        <div class="w-[400px] h-[600px] shadow-xl grid content-between rounded-[15px] py-[35px] px-[50px]">
-            <h2 class="text-[30px] text-center">VIP 1</h2>
-            <p>Aqui los beneficios del plan...</p>
-            <button class="w-[100%] shadow-xl mt-[20px] bg-blue-500 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-600">Unirse</button>
-        </div>
-        <div class="w-[400px] h-[600px] shadow-xl grid content-between rounded-[15px] py-[35px] px-[50px]">
-            <h2 class="text-[30px] text-center">VIP 2</h2>
-            <p>Aqui los beneficios del plan...</p>
-            <button class="w-[100%] shadow-xl mt-[20px] bg-blue-500 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-600">Unirse</button>
-        </div>
-        <div class="w-[400px] h-[600px] shadow-xl grid content-between rounded-[15px] py-[35px] px-[50px]">
-            <h2 class="text-[30px] text-center">VIP 3</h2>
-            <p>Aqui los beneficios del plan...</p>
+        <div *ngFor="let plan of planesSocios" class="w-[400px] h-[600px] shadow-xl grid content-between rounded-[15px] py-[35px] px-[50px]">
+            <h2 class="text-[30px] text-center">{{plan['planSocios']}}</h2>
+            <p id="beneficios">{{plan['beneficios']}}</p>
+            <p>{{plan['precio']}} €</p>
             <button class="w-[100%] shadow-xl mt-[20px] bg-blue-500 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-600">Unirse</button>
         </div>
     </div>

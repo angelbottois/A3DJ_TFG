@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-citas',
@@ -7,10 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CitasComponent implements OnInit {
 
-  constructor() { }
+  horas: any = null;
+
+  constructor(private apiS: ApiService) { }
 
   ngOnInit(): void {
     this.limitarFecha();
+    this.obtenerHorasDisponibles();
+  }
+
+  obtenerHorasDisponibles(){
+    let input: HTMLInputElement|null = document.querySelector('#fecha');
+    input?.addEventListener('input',()=>{
+      this.apiS.obtenerHoras(input?.value).subscribe((horas)=>{
+        this.horas = horas;
+        console.log(this.horas);
+        
+        
+        
+      });
+    });
   }
 
   limitarFecha(){
@@ -18,9 +35,7 @@ export class CitasComponent implements OnInit {
     const year = fechaActual.getFullYear();
     const month = (fechaActual.getMonth() + 1).toString().padStart(2, '0');
     const day = fechaActual.getDate().toString().padStart(2, '0');
-    const input: any|null = document.getElementById('fecha');
-    console.log(input);
-    
+    const input: any|null = document.getElementById('fecha');    
     if(input){
       input.min = `${year}-${month}-${day}`;
     }

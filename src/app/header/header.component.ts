@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { ModalService } from '../services/modal/modal.service';
 import { SesionService } from '../services/sesion/sesion.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
   camera = new THREE.PerspectiveCamera(75, 200 / 200, 0.1, 1000);
   renderer = new THREE.WebGLRenderer( {alpha: true} );
 
-  constructor(private modalS: ModalService, private sesionS: SesionService, private apiS: ApiService, private cookieS: CookieService) { }
+  constructor(private router: Router ,private modalS: ModalService, private sesionS: SesionService, private apiS: ApiService, private cookieS: CookieService) { }
 
   ngOnInit(): void {
     if(!this.cookieS.get("iniciado")){
@@ -69,5 +70,6 @@ export class HeaderComponent implements OnInit {
 
   cerrarSesion() :void{
     this.cookieS.set("iniciado", "false");
+    location.reload();
   }
 }

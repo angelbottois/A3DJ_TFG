@@ -19,7 +19,14 @@ export class ApiService {
     const url = `${this.apiUrl}/cliente`;    
     return this.http.post(url, data)
   }
+  obtenerHoras(fecha: any): Observable<any>{
+    const url = `${this.apiUrl}/horasDisp/${fecha}`;    
+    return this.http.get(url);
+  }
   obtenerPiezas(): Observable<any> {
     return this.http.get(`${this.apiUrl}/piezas`);
+  }
+  obtenerPlanes(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/planes`);
   }
 }

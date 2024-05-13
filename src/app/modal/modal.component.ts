@@ -100,6 +100,7 @@ export class ModalComponent implements OnInit {
               this.borrarValorError();
             }else{
               this.cookieS.set("iniciado", "true");
+              location.reload();
             }
           })
         }else{
