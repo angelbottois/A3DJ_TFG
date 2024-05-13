@@ -15,9 +15,13 @@ export class ApiService {
     const url = `${this.apiUrl}/iniciarSesion/${correo}/${pass}`;
     return this.http.get(url);
   }
-  register(data : any): Observable<any>{    
+  register(data: any): Observable<any>{    
     const url = `${this.apiUrl}/cliente`;    
     return this.http.post(url, data)
+  }
+  addCita(data: any): Observable<any>{
+    const url = `${this.apiUrl}/cita`;
+    return this.http.post(url, data);
   }
   obtenerHoras(fecha: any): Observable<any>{
     const url = `${this.apiUrl}/horasDisp/${fecha}`;    
