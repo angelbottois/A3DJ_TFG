@@ -102,7 +102,6 @@ export class CitasComponent implements OnInit {
         if(hora?.value != "0"){            
           let data = {fecha: fecha.value, detalles: motivo.value, hora: hora?.value};
           this.apiS.addCita(data).subscribe((response)=>{
-            // console.log(response);
             location.reload();
           });
         }else{

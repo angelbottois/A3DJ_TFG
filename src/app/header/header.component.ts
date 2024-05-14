@@ -15,7 +15,8 @@ export class HeaderComponent implements OnInit {
 
   modalSwitch: boolean = false;
   iniciado: string = "";
-  
+  admin: boolean = false;
+
   logoScene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(75, 200 / 200, 0.1, 1000);
   renderer = new THREE.WebGLRenderer( {alpha: true} );
@@ -27,7 +28,10 @@ export class HeaderComponent implements OnInit {
       this.cookieS.set("iniciado", "false");
       this.iniciado = this.cookieS.get("iniciado");
     }else{
-      this.iniciado = this.cookieS.get("iniciado");      
+      this.iniciado = this.cookieS.get("iniciado");
+      if(this.iniciado != "false"){
+        this.esAdmin();
+      }
     }
     this.modalS.$modal.subscribe((valor)=>{this.modalSwitch = valor});
     this.createLogo();
@@ -66,6 +70,16 @@ export class HeaderComponent implements OnInit {
       this.renderer.render(this.logoScene, this.camera);
     };
     animate();
+  }
+
+  esAdmin(){
+    if(this.iniciado != "false"){
+      this.apiS.esAdmin().subscribe((response)=>{
+        if(response){
+          this.admin = true;
+        }
+      });
+    }
   }
 
   cerrarSesion() :void{

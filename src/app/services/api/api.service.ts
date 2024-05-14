@@ -13,8 +13,12 @@ export class ApiService {
   constructor(private http: HttpClient, private cookieS: CookieService) { }
 
   private getHeaders(): HttpHeaders {
-    const token = this.cookieS.get('iniciado');
+    const token = this.cookieS.get('iniciado');        
     return new HttpHeaders().set('authorization', `Bearer ${token}`);
+  }
+
+  private getToken(){
+    return this.cookieS.get('iniciado');   
   }
 
   login(correo: string, pass: string): Observable<any>{
@@ -29,6 +33,11 @@ export class ApiService {
     const url = `${this.apiUrl}/cita`;
     const headers = this.getHeaders();
     return this.http.post(url, data, {headers});
+  }
+  esAdmin(): Observable<any>{
+    const url = `${this.apiUrl}/admin`;
+    const data = {token: this.getToken()};
+    return this.http.post(url, data);
   }
   obtenerHoras(fecha: any): Observable<any>{
     const url = `${this.apiUrl}/horasDisp/${fecha}`;    

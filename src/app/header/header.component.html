@@ -13,7 +13,8 @@
             <button class="text-[18px] px-[25px] py-[15px] shadow-xl bg-blue-500 rounded-[5px] hover:bg-blue-600" (click)="switchModal()">Inicia Sesión</button>
         </div>
         <div *ngIf="iniciado != 'false'" class="w-[400px] grid justify-items-center grid-cols-2">
-            <button class="w-40 text-[16px] px-[25px] py-[15px] shadow-xl bg-blue-500 rounded-[5px] hover:bg-blue-600"><a href="perfil" class="text-[15px] font-medium">Perfil Personal</a></button>
+            <button *ngIf="admin == false" class="w-40 text-[16px] px-[25px] py-[15px] shadow-xl bg-blue-500 rounded-[5px] hover:bg-blue-600"><a href="perfil" class="text-[15px] font-medium">Perfil Personal</a></button>
+            <button *ngIf="admin == true" class="w-40 text-[16px] px-[25px] py-[15px] shadow-xl bg-blue-500 rounded-[5px] hover:bg-blue-600"><a href="admin" class="text-[15px] font-medium">Panel de administración</a></button>
             <button class="w-40 text-[16px] px-[25px] py-[15px] shadow-xl bg-red-500 rounded-[5px] hover:bg-red-600" (click)="cerrarSesion()">Cerrar Sesión</button>
         </div>
 </header>
