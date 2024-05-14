@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,12 @@ export class ApiService {
 
   private apiUrl: string = 'http://localhost/a3dj_api/api/v1/a3dj';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieS: CookieService) { }
+
+  private getHeaders(): HttpHeaders {
+    const token = this.cookieS.get('iniciado');
+    return new HttpHeaders().set('authorization', `Bearer ${token}`);
+  }
 
   login(correo: string, pass: string): Observable<any>{
     const url = `${this.apiUrl}/iniciarSesion/${correo}/${pass}`;
@@ -21,7 +27,8 @@ export class ApiService {
   }
   addCita(data: any): Observable<any>{
     const url = `${this.apiUrl}/cita`;
-    return this.http.post(url, data);
+    const headers = this.getHeaders();
+    return this.http.post(url, data, {headers});
   }
   obtenerHoras(fecha: any): Observable<any>{
     const url = `${this.apiUrl}/horasDisp/${fecha}`;    

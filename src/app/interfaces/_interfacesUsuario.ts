@@ -20,3 +20,8 @@ export interface Supervisor {
     hashPass: string
     administrador: boolean
 }
+
+export interface Hora {
+    id: number,
+    hora: string
+}

@@ -18,27 +18,27 @@ export class ModalComponent implements OnInit {
   apeError: string = "";
   mailError: string = "";
 
-  currentUserC :Cliente = {
-    idUsuario: "",
-    correo: "",
-    nombre: "",
-    apellidos: "",
-    fotoPerfil: "",
-    activo: false,
-    hashPass: "",
-    planSocios: "",
-    planActivo: false
-  }
-  currentUserS :Supervisor = {
-    idUsuario: "",
-    correo: "",
-    nombre: "",
-    apellidos: "",
-    fotoPerfil: "",
-    activo: false,
-    hashPass: "",
-    administrador: false
-  }
+  // currentUserC :Cliente = {
+  //   idUsuario: "",
+  //   correo: "",
+  //   nombre: "",
+  //   apellidos: "",
+  //   fotoPerfil: "",
+  //   activo: false,
+  //   hashPass: "",
+  //   planSocios: "",
+  //   planActivo: false
+  // }
+  // currentUserS :Supervisor = {
+  //   idUsuario: "",
+  //   correo: "",
+  //   nombre: "",
+  //   apellidos: "",
+  //   fotoPerfil: "",
+  //   activo: false,
+  //   hashPass: "",
+  //   administrador: false
+  // }
 
   constructor(private modalS: ModalService, private apiS: ApiService, private cookieS: CookieService) { }
 
@@ -98,8 +98,8 @@ export class ModalComponent implements OnInit {
             if(response == null){
               this.passError = "Credenciales incorrectas";
               this.borrarValorError();
-            }else{
-              this.cookieS.set("iniciado", "true");
+            }else{              
+              this.cookieS.set("iniciado", response);
               location.reload();
             }
           })

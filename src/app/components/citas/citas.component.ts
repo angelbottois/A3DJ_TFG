@@ -1,34 +1,78 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { Hora } from 'src/app/interfaces/_interfacesUsuario';
 import { ApiService } from 'src/app/services/api/api.service';
+import { ModalService } from 'src/app/services/modal/modal.service';
 
 @Component({
   selector: 'app-citas',
   templateUrl: './citas.component.html',
   styleUrls: ['./citas.component.css']
 })
+
 export class CitasComponent implements OnInit {
 
-  horas: any = null;
+  modalSwitch: boolean = false;
+
+  horas: Hora[] = [
+    {
+      id: 0,
+      hora: ""
+    },
+    {
+      id: 0,
+      hora: ""
+    },
+    {
+      id: 0,
+      hora: ""
+    },
+    {
+      id: 0,
+      hora: ""
+    }
+  ];
   fecha: any = null;
   errorM: string = "";
   errorF: string = "";
-  constructor(private apiS: ApiService) { }
+  constructor(private apiS: ApiService, private modalS: ModalService, private cookieS: CookieService) { }
 
   ngOnInit(): void {
+    if(this.cookieS.get('iniciado') == "false"){
+      this.switchModal();
+    }
     this.limitarFecha();
     this.obtenerHorasDisponibles();
+    this.modalS.$modal.subscribe((valor)=>{this.modalSwitch = valor});
   }
 
   obtenerHorasDisponibles(){
-    let input: HTMLInputElement|null = document.querySelector('#fecha');
+    let input: HTMLInputElement|null = document.querySelector('#fecha');    
     input?.addEventListener('input',()=>{
-      this.fecha = input?.value;
-      this.apiS.obtenerHoras(input?.value).subscribe((horas)=>{
-        if(horas.length == 0){
-          this.horas[0].idHora = "0";
+      this.limpiar();
+      this.fecha = input?.value;      
+      this.apiS.obtenerHoras(input?.value).subscribe((horas)=>{        
+        if(horas == null){
+          this.horas[0].id = 0;
           this.horas[0].hora = "No hay horas disponibles";
         }else{
-          this.horas = horas;
+          horas.forEach((hora: any, index: number) => {
+            this.horas[index].id = hora;
+            switch (hora){
+              case 1:
+                this.horas[index].hora = "10:00";
+                break;
+              case 2:
+                this.horas[index].hora = "12:00";
+                break;
+              case 3:
+                this.horas[index].hora = "16:00";
+                break;
+              case 4:
+                this.horas[index].hora = "18:00";
+                break;    
+            }
+          });
         }
       });
     });
@@ -46,16 +90,21 @@ export class CitasComponent implements OnInit {
   }
 
   insertarCita(){
+    if(this.cookieS.get('iniciado') == "false"){
+      this.switchModal();
+      return;
+    }
     const motivo: any = document.querySelector('#motivo');
     let fecha: HTMLInputElement|null = document.querySelector('#fecha');
     let hora: HTMLInputElement|null = document.querySelector('#hora');
     if(motivo.value != ""){
       if(fecha?.value){
-        if(hora?.value != "0"){
-          
-
-
-          // this.apiS.addCita();
+        if(hora?.value != "0"){            
+          let data = {fecha: fecha.value, detalles: motivo.value, hora: hora?.value};
+          this.apiS.addCita(data).subscribe((response)=>{
+            // console.log(response);
+            location.reload();
+          });
         }else{
           this.errorF = "Seleccione otra fecha";
           setTimeout(() => {
@@ -74,5 +123,16 @@ export class CitasComponent implements OnInit {
         this.errorM = "";
       }, 3000);
     }
+  }
+
+  limpiar(){
+    this.horas.forEach(hora=>{
+      hora.id = 0;
+      hora.hora = "";
+    });
+  }
+
+  switchModal(): void{
+    this.modalSwitch = true;
   }
 }

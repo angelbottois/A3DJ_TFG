@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
       this.cookieS.set("iniciado", "false");
       this.iniciado = this.cookieS.get("iniciado");
     }else{
-      this.iniciado = this.cookieS.get("iniciado");
+      this.iniciado = this.cookieS.get("iniciado");      
     }
     this.modalS.$modal.subscribe((valor)=>{this.modalSwitch = valor});
     this.createLogo();
