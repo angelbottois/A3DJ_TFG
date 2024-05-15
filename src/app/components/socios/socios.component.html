@@ -1,11 +1,11 @@
 <div class="padre grid justify-items-center">
-    <h1 class="text-center text-[45px] mb-[20px]">Planes de socios</h1>
-    <div class="planes grid grid-cols-3 gap-[50px]">
+    <p class="text-center text-[45px]">Planes de socios</p>
+    <div class="planes grid grid-cols-3 gap-[50px] mt-[25px]">
         <div *ngFor="let plan of planesSocios" class="w-[400px] h-[600px] shadow-xl grid content-between rounded-[15px] py-[35px] px-[50px]">
-            <h2 class="text-[30px] text-center">{{plan['planSocios']}}</h2>
-            <p id="beneficios">{{plan['beneficios']}}</p>
-            <p>{{plan['precio']}} €</p>
-            <button class="w-[100%] shadow-xl mt-[20px] bg-blue-500 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-600">Unirse</button>
+            <p class="text-[27px] text-black text-center">{{plan['planSocios']}}</p>
+            <p class="text-[20px] text-black text-center" id="beneficios">{{plan['beneficios']}}</p>
+            <p class="text-[20px] text-black text-center">El precio de este plan es de {{plan['precio']}},99€</p>
+            <button class="w-[100%] shadow-xl mt-[20px] bg-blue-700 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-800">Unirse</button>
         </div>
     </div>
 </div>

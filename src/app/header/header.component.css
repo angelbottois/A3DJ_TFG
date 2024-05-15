@@ -1,6 +1,6 @@
 header{
     display: grid;
-    width: 1900px;
+    width: 100%;
     grid-template-columns: repeat(3, auto);
     justify-content: center;
     gap: 100px;

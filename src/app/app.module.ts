@@ -16,6 +16,7 @@ import { ModalComponent } from './modal/modal.component';
 import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { ApiService } from './services/api/api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminModalComponent } from './admin-modal/admin-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     CitasComponent,
     ModalComponent,
     NosotrosComponent,
+    AdminModalComponent,
   ],
   imports: [
     BrowserModule,

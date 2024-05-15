@@ -77,16 +77,16 @@ export class HeaderComponent implements OnInit {
 
   createLogo(): void {
     const logo = document.querySelector('.logo');
-    this.renderer.setSize(200, 200);
+    this.renderer.setSize(300, 250);
     logo?.appendChild(this.renderer.domElement);
   
     // Cargar la fuente
     const fontLoader = new FontLoader();
-    fontLoader.load('../../assets/font/Minecraft_Regular.json', (font) => {
+    fontLoader.load('../../assets/font/Pixellari_Medium.json', (font) => {
       const textGeometry = new TextGeometry('A3DJ', {
         font: font,
         size: 1,
-        height: 0.2,
+        depth: 0.2,
         curveSegments: 12,
         bevelEnabled: true,
         bevelThickness: 0.03,

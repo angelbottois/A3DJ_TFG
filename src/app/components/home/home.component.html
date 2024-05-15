@@ -1,11 +1,17 @@
 <div>
-    <p class="primero text-center text-[45px]">Bienvenid@ al sitio web de <span class="nombre"></span></p><br>
-    <p class="segundo text-center text-[20px] mt-[20px]">El lugar en el que podrás encontrar tus piezas 3D favoritas</p>
+    <p class="primero text-center text-[30px]">No esperes más y busca tus piezas 3D favoritas</p><br>
+    <!-- <p class="segundo text-center text-[20px] mt-[20px]"></p> -->
     <div class="buscador grid justify-items-center mt-[30px] mb-[50px]">
-        <form action="#">
-            <input type="search" name="buscador" id="buscador" placeholder="Busca aquí la pieza por su nombre" class="rounded-l-[50px] shadow-xl bg-slate-300 pl-[20px] h-[65px] w-[1000px]">
-            <input type="submit" value="Buscar" class="bg-blue-500 shadow-xl h-[65px] rounded-r-[50px] px-[20px] hover:bg-blue-600 cursor-pointer">
-        </form>
+        <!-- <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"></label> -->
+        <div class="relative w-[50%]">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
+            </div>
+            <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Añade aquí el nombre de la pieza..." required />
+            <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Buscar</button>
+        </div>
     </div>
     <div class="ejemplos grid justify-items-center mb-[30px]">
         <h2 class="text-[20px] mb-[30px]">Piezas más populares de los últimos 30 días</h2>
@@ -15,7 +21,7 @@
             <div class="w-[300px] h-[300px] bg-slate-400"></div>
             <div class="w-[300px] h-[300px] bg-slate-400"></div>
         </div>
-        <button class="mt-[20px] shadow-xl bg-blue-500 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-600"><a href="catalogo" class="text-[15px] font-medium">Ir al catálogo</a></button>
+        <button class="mt-[20px] shadow-xl bg-blue-700 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-800"><a href="catalogo" class="text-[15px] font-medium">Ir al catálogo</a></button>
     </div>
 </div>
 <div class="info shadow-xl w-[200px] h-[100px] rounded-[5px]">

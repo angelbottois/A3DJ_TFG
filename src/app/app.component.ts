@@ -1,131 +1,148 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import * as THREE from 'three';
-import { PCDLoader } from 'three/examples/jsm/loaders/PCDLoader'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'A3DJ_TFG';
+  private camera!: THREE.PerspectiveCamera;
+  private scene!: THREE.Scene;
+  private renderer!: THREE.WebGLRenderer;
+  private stars: THREE.Mesh[] = [];
+  private controls!: OrbitControls;
 
   constructor() { }
 
-  ngOnInit(){
-
+  ngOnInit(): void {
+    this.init();
+    this.addSphere();
   }
 
-  generarFondo(){
-    let scene: any;
-    let camera: any;
-    let renderer: any;
-    let container: any, mouseX: any, mouseY: any, aspectRatio: any, height: any, 
-      width: any, fieldOfView: any, nearPlane: any, farPlane: any,
-      windowHalfX: any, windowHalfY: any, stats: any, geometry: any, 
-      startStuff: any, materialOptions: any, stars: any;
+  ngAfterViewInit(): void {
+    this.animateStars();
+  }
 
+  private init(): void {
+    // Configurar la cámara
+    this.camera = new THREE.PerspectiveCamera(
+      45,
+      window.innerWidth / window.innerHeight,
+      1,
+      1000
+    );
+    this.camera.position.z = 5;
 
-    init();
-    animate();
-    
-    function init(){
-      container = document.querySelector('body');
-      // document.body.style.overflow = 'hidden';
+    // Configurar la escena
+    this.scene = new THREE.Scene();
 
-      width = window.innerWidth;
-      height = window.innerHeight;
-      aspectRatio = height/width;
-      fieldOfView = 75;
-      nearPlane = 1;
-      farPlane = 1000;
-      mouseX = 0;
-      mouseY = 0;
-      windowHalfX = width/2;
-      windowHalfY = height/2;
-      camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, nearPlane, farPlane);
+    // Configurar el renderer
+    this.renderer = new THREE.WebGLRenderer();
+    this.setRendererSize();
+    this.renderer.domElement.style.position = 'absolute';
+    this.renderer.domElement.style.top = '0';
+    this.renderer.domElement.style.left = '0';
+    this.renderer.domElement.style.zIndex = '-1';
 
-      camera.position.z = farPlane / 2;
-      scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x000000, 0.0003);
+    // Añadir el renderer al body del documento HTML
+    document.body.appendChild(this.renderer.domElement);
 
-      starForge();
+    // Configurar OrbitControls
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.25;
+    this.controls.enableZoom = false;
+    this.controls.enableRotate = false;
 
-      if(webGLSupport()){
-        renderer = new THREE.WebGLRenderer({alpha: true});
-      }else{
-        // renderer = new THREE.CanvasRenderer();
+    // Manejar el redimensionamiento de la ventana
+    window.addEventListener('resize', this.onWindowResize.bind(this), false);
+    // Manejar el movimiento del ratón
+    window.addEventListener('mousemove', this.onMouseMove.bind(this), false);
+  }
+
+  private addSphere(): void {
+    for (let z = -1000; z < 1000; z += 6) {
+      const random = +(Math.random() * 10).toFixed(0);
+      let colorValue: number;
+      switch (random) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+          colorValue = 0x8cde0d;
+          break;
+        case 4:
+        case 5:
+        case 6:
+          colorValue = 0x00bfff;
+          break;
+        case 7:
+        case 8:
+        case 9:
+          colorValue = 0x8855f3;
+          break;
+        default:
+          colorValue = 0x8cde0d;
+          break;
       }
 
-      renderer.setClearColor(0x000011, 1);
-      renderer.setPixelRatio(window.devicePixelRatio);
-      renderer.setSize(width, height);
-      renderer.appendChild(renderer.doomElement);
+      const geometry = new THREE.SphereGeometry(0.5, 32, 32);
+      const material = new THREE.MeshBasicMaterial({ color: colorValue });
+      const sphere = new THREE.Mesh(geometry, material);
+      const sphere1 = new THREE.Mesh(geometry, material);
 
-      stats = new stats();
-      stats.doomElement.style.position = 'absolute';
-      stats.doomElement.style.top = '0px';
-      stats.doomElement.style.rigth = '0px';
-      container.appendChild(stats.doomElement);
+      sphere.position.x = Math.random() * 1000 - 500;
+      sphere.position.y = Math.random() * 1000 - 500;
+      sphere.position.z = z;
 
-      window.addEventListener('resize', onWindowResize, false);
-      document.addEventListener('mousemove', onMouseMove, false);
+      sphere1.position.x = Math.random() * 1000 - 500;
+      sphere1.position.y = Math.random() * 1000 - 500;
+      sphere1.position.z = z;
+
+      sphere.scale.x = sphere.scale.y = 2;
+      sphere1.scale.x = sphere1.scale.y = 2;
+
+      this.scene.add(sphere);
+      this.scene.add(sphere1);
+
+      this.stars.push(sphere);
+      this.stars.push(sphere1);
     }
+  }
 
-    function animate(){
-      requestAnimationFrame(animate);
-      render();
-      stats.update();
+  @HostListener('window:resize', ['$event'])
+  private onWindowResize(): void {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.setRendererSize();
+  }
+
+  private setRendererSize(): void {
+    const width = window.innerWidth;
+    const height = Math.max(window.innerHeight, document.body.scrollHeight);
+    this.renderer.setSize(width, height);
+  }
+
+  private animateStars(): void {
+    requestAnimationFrame(() => this.animateStars());
+    for (const star of this.stars) {
+      star.position.z += 0.1;
+      if (star.position.z > 1000) star.position.z -= 2000;
     }
+    this.controls.update();
+    this.renderer.render(this.scene, this.camera);
+  }
 
-    function render(){
-      camera.position.x += (mouseX - camera.position.x) * 0.005;
-      camera.position.y += (mouseY - camera.position.y) * 0.005;
-      camera.lookAt(scene.position);
-      renderer.render(scene, camera);
-    }
+  private onMouseMove(event: MouseEvent): void {
+    const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+    const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 
-    function webGLSupport(){
-      try{
-        let canvas = document.createElement('canvas');
-        return !!(window.WebGLRenderingContext && (
-          canvas.getContext('webgl') || canvas.getContext('experiment-webgl')
-        ));
-      }catch (e){
-        return false;
-      }
-    }
+    this.camera.position.x += mouseX * 0.004;
+    this.camera.position.y += mouseY * 0.004;
 
-    function onWindowResize(){
-      let height2 = window.innerHeight;
-          width = window.innerWidth;
-      camera.aspect = aspectRatio;
-      camera.updateProjectionMatrix();
-      renderer.setSize(height2, width);
-    }
-
-    function starForge(){
-      let starQty = 45000;
-      geometry = new THREE.SphereGeometry(1000, 100, 50);
-
-      materialOptions = {size: 1.0,transparency: true,opacity: 0.7};
-      startStuff = new THREE.PointsMaterial(materialOptions);
-
-      for(let i = 0; i<starQty; i++){
-        let starVertex = new THREE.Vector3();
-        starVertex.x = Math.random() * 2000 - 1000;
-        starVertex.y = Math.random() * 2000 - 1000;
-        starVertex.z = Math.random() * 2000 - 1000;
-        geometry.vertives.push(starVertex);
-      }
-      // stars = new THREE.PointCloud(geometry, starStuff);
-      scene.add(stars);
-    }
-
-    function onMouseMove(e: any){
-      mouseX = e.clienteX - windowHalfX;
-      mouseY = e.clienteY - windowHalfY;
-
-    }
-
+    this.camera.lookAt(this.scene.position);
   }
 }

@@ -1,12 +1,12 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ModalService {
+export class AdminModalService {
 
   constructor() { }
 
   $modal = new EventEmitter<any>();
-  
+
 }
