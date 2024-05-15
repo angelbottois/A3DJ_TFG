@@ -36,6 +36,7 @@ export class CitasComponent implements OnInit {
   fecha: any = null;
   errorM: string = "";
   errorF: string = "";
+
   constructor(private apiS: ApiService, private modalS: ModalService, private cookieS: CookieService) { }
 
   ngOnInit(): void {
