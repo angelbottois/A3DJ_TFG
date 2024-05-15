@@ -53,7 +53,7 @@
   background-image: url('../../../assets/img/piezas/cactus.webp');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 90%;
+  background-size: 100%;
   border-radius: 10px;
 }
 #pieza4{
@@ -62,7 +62,7 @@
   background-image: url('../../../assets/img/piezas/phone.webp');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 125%;
   border-radius: 10px;
 }
 @keyframes aparecer {

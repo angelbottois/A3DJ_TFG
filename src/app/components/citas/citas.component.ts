@@ -13,6 +13,7 @@ import { ModalService } from 'src/app/services/modal/modal.service';
 export class CitasComponent implements OnInit {
 
   modalSwitch: boolean = false;
+  infoModal: boolean = false;
 
   horas: Hora[] = [
     {
@@ -101,9 +102,12 @@ export class CitasComponent implements OnInit {
       if(fecha?.value){
         if(hora?.value != "0"){            
           let data = {fecha: fecha.value, detalles: motivo.value, hora: hora?.value};
-          this.apiS.addCita(data).subscribe((response)=>{
-
-            location.reload();
+          this.apiS.addCita(data).subscribe((response)=>{            
+            if(response){
+              this.switchInfo();
+            }else{
+              location.reload();
+            }
           });
         }else{
           this.errorF = "Seleccione otra fecha";
@@ -130,6 +134,15 @@ export class CitasComponent implements OnInit {
       hora.id = 0;
       hora.hora = "";
     });
+  }
+
+  switchInfo(){
+    this.infoModal = true;
+  }
+
+  closeModal(){
+    this.infoModal = false;
+    location.reload();
   }
 
   switchModal(): void{

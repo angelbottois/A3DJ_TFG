@@ -12,6 +12,7 @@ export class AdminModalComponent implements OnInit {
 
   estado: string = "c"; 
   citas: any[] = [];
+  error: string = "";
 
   constructor(private modalS: AdminModalService, private apiS: ApiService) { }
 
@@ -29,7 +30,11 @@ export class AdminModalComponent implements OnInit {
   activarCita(id: string){
     const data = {idCita: id};
     this.apiS.updateCita(data).subscribe((response)=>{
-            
+      if(response){
+        this.obtenerCitas();
+      }else{
+        this.error = "Error al aprobar la cita.";
+      }
     });
   }
 

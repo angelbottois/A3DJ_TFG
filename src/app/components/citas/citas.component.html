@@ -2,7 +2,7 @@
     <div class="form grid items-center w-[600px] h-[600px] px-[50px] shadow-xl rounded-[10px]">
         <div>
             <label for="motivo" class="text-[24px] flex justify-between">Motivo por el cuál quieres reservar una cita <span class="ml-[10px]">❗</span></label>
-            <textarea type="text" name="motivo" id="motivo" class="max-h-[250px] shadow-xl min-h-[50px] mt-5 p-4 border rounded-[10px] w-[100%]" placeholder="!Cuidado con lo que escribes, la cita siempre queda pendiente de revisón¡"></textarea>
+            <textarea type="text" name="motivo" id="motivo" class="max-h-[250px] shadow-xl min-h-[50px] mt-5 p-4 border rounded-[10px] w-[100%]" placeholder="Cuidado con lo que escribes, la cita siempre queda pendiente de revisón"></textarea>
             <p class="text-red-500 font-semibold text-[16px]">{{errorM}}</p>
         </div>
         <div>
@@ -21,4 +21,18 @@
 </div>
 <div *ngIf="modalSwitch == true">
     <app-modal></app-modal>
+</div>
+<div *ngIf="infoModal == true">
+    <div class="modal">
+        <div class="bg-white rounded-lg shadow relative dark:bg-gray-700 w-auto">
+            <div class="flex justify-end p-2">
+                <button (click)="closeModal()" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                </button>
+            </div>
+            <div class="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8">
+                <p class="text-[25px] font-medium text-gray-900 dark:text-white">La cita se envió correctamente. Ahora esta pendiente de aprobación.</p>
+            </div>
+        </div>
+    </div>
 </div>
