@@ -60,7 +60,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Manejar el redimensionamiento de la ventana
     window.addEventListener('resize', this.onWindowResize.bind(this), false);
     // Manejar el movimiento del ratón
-    window.addEventListener('mousemove', this.onMouseMove.bind(this), false);
+    // window.addEventListener('mousemove', this.onMouseMove.bind(this), false);
   }
 
   private addSphere(): void {
@@ -72,20 +72,20 @@ export class AppComponent implements OnInit, AfterViewInit {
         case 1:
         case 2:
         case 3:
-          colorValue = 0x8cde0d;
+          colorValue = 0xFEBB00;
           break;
         case 4:
         case 5:
         case 6:
-          colorValue = 0x00bfff;
+          colorValue = 0x00B0F6;
           break;
         case 7:
         case 8:
         case 9:
-          colorValue = 0x8855f3;
+          colorValue = 0xFEBB00;
           break;
         default:
-          colorValue = 0x8cde0d;
+          colorValue = 0x00B0F6;
           break;
       }
 
@@ -129,20 +129,20 @@ export class AppComponent implements OnInit, AfterViewInit {
   private animateStars(): void {
     requestAnimationFrame(() => this.animateStars());
     for (const star of this.stars) {
-      star.position.z += 0.1;
+      star.position.z += 0.2;
       if (star.position.z > 1000) star.position.z -= 2000;
     }
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
   }
 
-  private onMouseMove(event: MouseEvent): void {
-    const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-    const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+  // private onMouseMove(event: MouseEvent): void {
+  //   const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+  //   const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 
-    this.camera.position.x += mouseX * 0.004;
-    this.camera.position.y += mouseY * 0.004;
+  //   this.camera.position.x += mouseX * 0.004;
+  //   this.camera.position.y += mouseY * 0.004;
 
-    this.camera.lookAt(this.scene.position);
-  }
+  //   this.camera.lookAt(this.scene.position);
+  // }
 }

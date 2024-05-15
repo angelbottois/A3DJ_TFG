@@ -46,12 +46,13 @@
                                 {{cita.idSupervisor}}
                             </td>
                             <td class="px-6 py-4">
-                                {{cita.citaActiva}}
-                            </td><td class="px-6 py-4">
+                                <span *ngIf="cita.citaActiva==true">&#x2714; Aprobada</span>
+                                <span *ngIf="cita.citaActiva==false">&#x2753; Pendiente</span>
+                            </td><td class="px-6 py-4 max-w-[300px]">
                                 {{cita.detalles}}
                             </td>
                             <td class="px-6 py-4">
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <a *ngIf="cita.citaActiva == false" class="cursor-pointer font-medium text-blue-600 dark:text-blue-500 hover:underline" (click)="activarCita(cita.idCita)">Confirmar</a>
                             </td>
                     </tbody>
                 </table>

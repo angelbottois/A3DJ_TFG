@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminModalService } from '../services/admin-modal/admin-modal.service';
 import { ApiService } from '../services/api/api.service';
+import { reverse } from 'dns';
 
 @Component({
   selector: 'app-admin-modal',
@@ -20,9 +21,15 @@ export class AdminModalComponent implements OnInit {
 
   obtenerCitas(){
     this.apiS.obtenerCitas().subscribe((response)=>{
-      console.log(response);
-      
-      this.citas = response;
+      let citasPre = response;
+      this.citas = citasPre;
+    });
+  }
+
+  activarCita(id: string){
+    const data = {idCita: id};
+    this.apiS.updateCita(data).subscribe((response)=>{
+            
     });
   }
 

@@ -22,6 +22,8 @@ export class ApiService {
     return this.cookieS.get('iniciado');   
   }
 
+  
+
   login(correo: string, pass: string): Observable<any>{
     const url = `${this.apiUrl}/iniciarSesion/${correo}/${pass}`;
     return this.http.get(url);
@@ -34,6 +36,10 @@ export class ApiService {
     const url = `${this.apiUrl}/cita`;
     const headers = this.getHeaders();
     return this.http.post(url, data, {headers});
+  }
+  updateCita(data: any): Observable<any>{
+    const url = `${this.apiUrl}/cita`;
+    return this.http.put(url, data);
   }
   esAdmin(): Observable<any>{
     const url = `${this.apiUrl}/admin`;
@@ -53,7 +59,7 @@ export class ApiService {
   obtenerCitas(): Observable<any> {
     return this.http.get(`${this.apiUrl}/citas`);
   }
-  obtenerUsuarioCorreo(correo: string){
+  obtenerUsuarioCorreo(correo: string): Observable<any>{
     return this.http.get(`${this.apiUrl}/usuarioCorreo/${correo}`);
   }
 }
