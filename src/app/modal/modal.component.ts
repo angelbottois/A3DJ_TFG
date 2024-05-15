@@ -12,6 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class ModalComponent implements OnInit {
 
   estado: string = "l"; 
+  activo = false;
   iniciado: string = "";
   passError: string = "";
   nameError: string = "";
@@ -65,7 +66,8 @@ export class ModalComponent implements OnInit {
             let data = JSON.stringify({nombre: nombre.value, apellidos: apellidos.value, pass: pass.value, correo: correo.value});
       
             this.apiS.register(data).subscribe(
-              (response: any) => {
+              (response) => {
+                console.log(response);
                 
               }
             );
@@ -87,33 +89,58 @@ export class ModalComponent implements OnInit {
     }
   }
 
-  iniciarSesion(){
+  async iniciarSesion() {
     const correo: HTMLInputElement | null = document.querySelector('#email');
     const pass: HTMLInputElement | null = document.querySelector('#password');
     
-    if(correo && pass){
-      if(correo.value != ""){
-        if(pass.value != ""){
-          this.apiS.login(correo.value, pass.value).subscribe((response: any)=>{
-            if(response == null){
+    if (correo && pass) {
+      if (correo.value != "") {
+        if (pass.value != "") {
+          try {
+            const response: any = await this.apiS.login(correo.value, pass.value).toPromise();
+            if (response == null) {
               this.passError = "Credenciales incorrectas";
               this.borrarValorError();
-            }else{              
-              this.cookieS.set("iniciado", response);
-              location.reload();
+            } else {
+              await this.comprobarUsuarioActivo(correo.value);
+              
+              if (this.activo) {
+                this.cookieS.set("iniciado", response);
+                location.reload();
+              } else {
+                this.mailError = "Debes verificar la cuenta en tu correo";
+                this.borrarValorError();
+              }
             }
-          })
-        }else{
+          } catch (error) {
+            console.error('Error durante el inicio de sesión', error);
+            // Maneja el error si es necesario
+          }
+        } else {
           this.passError = "Contraseña no válida";
           this.borrarValorError();
         }
-      }else{
+      } else {
         this.mailError = "Correo no válido";
         this.borrarValorError();
       }
     }
   }
-
+  
+  comprobarUsuarioActivo(correo: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.apiS.obtenerUsuarioCorreo(correo).subscribe(
+        (response: any) => {
+          this.activo = response['activo'];
+          resolve();
+        },
+        (error) => {
+          console.error('Error al obtener el estado del usuario', error);
+          reject(error);
+        }
+      );
+    });
+  }
 
   closeModal(){
     this.modalS.$modal.emit(false);

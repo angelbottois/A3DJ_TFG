@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { core } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,11 @@ export class ApiService {
   }
   obtenerPlanes(): Observable<any>{
     return this.http.get(`${this.apiUrl}/planes`);
+  }
+  obtenerCitas(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/citas`);
+  }
+  obtenerUsuarioCorreo(correo: string){
+    return this.http.get(`${this.apiUrl}/usuarioCorreo/${correo}`);
   }
 }
