@@ -53,6 +53,12 @@ export class ApiService {
   obtenerPiezas(): Observable<any> {
     return this.http.get(`${this.apiUrl}/piezas`);
   }
+  obtenerPiezaId(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/piezaId/${id}`);
+  }
+  obtenerPiezasPopulares(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/piezasPop`);
+  }
   obtenerPlanes(): Observable<any>{
     return this.http.get(`${this.apiUrl}/planes`);
   }

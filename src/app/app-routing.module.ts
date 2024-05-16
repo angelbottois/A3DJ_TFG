@@ -7,6 +7,7 @@ import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { CitasComponent } from './components/citas/citas.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
+import { PiezaComponent } from './components/pieza/pieza.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'socios',
     component: SociosComponent,
+  },
+  {
+    path: 'pieza',
+    component: PiezaComponent,
   },
   {
     //Any other link will be redirected to the login website

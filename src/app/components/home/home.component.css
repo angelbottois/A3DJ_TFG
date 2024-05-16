@@ -24,46 +24,33 @@
   bottom: 90px;
   right: 30px; 
   animation: aparecer 5s ease-out forwards;
-  background-color: rgb(184, 184, 184);
+  background-color: #a39b7e;
 }
 .info.mostrar{
     opacity: 1;
 }
+.encargar{
+  background-color: #7a7b7c;
+  /* border: 1px solid gray; */
+}
+.descargar{
+  background-color: #53576b;
+  /* border: 1px solid gray; */
+}
+.encargar:hover{
+  background-color: #565657;
+}
+.descargar:hover{
+  background-color: #3e414f;
+}
 #pieza{
   width: 100%;
   height: 210px;
-  background-image: url('../../../assets/img/piezas/baston.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
   border-radius: 10px;
-}
-#pieza2{
-  width: 100%;
-  height: 210px;
-  background-image: url('../../../assets/img/piezas/bookmark.webp');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  border-radius: 10px;
-}
-#pieza3{
-  width: 100%;
-  height: 210px;
-  background-image: url('../../../assets/img/piezas/cactus.webp');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  border-radius: 10px;
-}
-#pieza4{
-  width: 100%;
-  height: 210px;
-  background-image: url('../../../assets/img/piezas/phone.webp');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 125%;
-  border-radius: 10px;
+  /* border: 2px solid gray; */
 }
 @keyframes aparecer {
   from {

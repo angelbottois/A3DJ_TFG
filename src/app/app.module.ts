@@ -17,6 +17,7 @@ import { NosotrosComponent } from './components/nosotros/nosotros.component';
 import { ApiService } from './services/api/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModalComponent } from './admin-modal/admin-modal.component';
+import { PiezaComponent } from './components/pieza/pieza.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AdminModalComponent } from './admin-modal/admin-modal.component';
     ModalComponent,
     NosotrosComponent,
     AdminModalComponent,
+    PiezaComponent,
   ],
   imports: [
     BrowserModule,

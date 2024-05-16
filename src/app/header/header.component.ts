@@ -100,7 +100,7 @@ export class HeaderComponent implements OnInit {
       // Verificar que la boundingBox no sea null
       if (textGeometry.boundingBox) {
         const centerOffset = -0.5 * (textGeometry.boundingBox.max.x - textGeometry.boundingBox.min.x);
-        const textMaterial = new THREE.MeshBasicMaterial({ color: 0x3B82F6 });
+        const textMaterial = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
         const textMesh = new THREE.Mesh(textGeometry, textMaterial);
   
         this.logoScene.add(textMesh);

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import * as THREE from 'three';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
-// import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+import { CookieService } from 'ngx-cookie-service';
+import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-home',
@@ -11,17 +9,27 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 })
 export class HomeComponent implements OnInit {
  
+  listaPiezas: any = [];
 
-  constructor() { }
+  constructor(private cookieS: CookieService, private apiS: ApiService) { }
 
   ngOnInit(): void {
-    // this.createNombre();
+    this.obtenerPiezasPopulares();
   }
 
   info(){
     document.querySelector('.info')?.classList.add('hidden')
   }
 
-  
+  obtenerPiezasPopulares(){
+    this.apiS.obtenerPiezasPopulares().subscribe((response)=>{
+      if(response){        
+        this.listaPiezas = response;
+      }
+    });
+  }
 
+  persistirPieza(id: string){
+    this.cookieS.set("pieza", id);
+  }
 }

@@ -15,10 +15,10 @@
   overflow-y: hidden;
 }
 .form{
-    background-color: rgb(184, 184, 184);
+    background-color: #a39b7e;
 }
 #fecha{
-    background-color: #ad8168;
+    background-color: #e2c99f;
     width: 100%;
     text-align: center;
     margin-top: 10px;

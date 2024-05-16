@@ -38,7 +38,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     // Configurar la escena
     this.scene = new THREE.Scene();
-
+    let color = new THREE.Color(0x353437);
+    this.scene.background = color;
     // Configurar el renderer
     this.renderer = new THREE.WebGLRenderer();
     this.setRendererSize();
@@ -72,24 +73,24 @@ export class AppComponent implements OnInit, AfterViewInit {
         case 1:
         case 2:
         case 3:
-          colorValue = 0xFEBB00;
+          colorValue = 0x53576b;
           break;
         case 4:
         case 5:
         case 6:
-          colorValue = 0x00B0F6;
+          colorValue = 0x7a7b7c;
           break;
         case 7:
         case 8:
         case 9:
-          colorValue = 0xFEBB00;
+          colorValue = 0xa39b7e;
           break;
         default:
-          colorValue = 0x00B0F6;
+          colorValue = 0xe2c99f;
           break;
       }
 
-      const geometry = new THREE.SphereGeometry(0.5, 32, 32);
+      const geometry = new THREE.SphereGeometry(1.5, 1, 3);
       const material = new THREE.MeshBasicMaterial({ color: colorValue });
       const sphere = new THREE.Mesh(geometry, material);
       const sphere1 = new THREE.Mesh(geometry, material);
@@ -129,7 +130,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   private animateStars(): void {
     requestAnimationFrame(() => this.animateStars());
     for (const star of this.stars) {
-      star.position.z += 0.2;
+      star.position.z += 0.1;
       if (star.position.z > 1000) star.position.z -= 2000;
     }
     this.controls.update();
@@ -140,8 +141,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   //   const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
   //   const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 
-  //   this.camera.position.x += mouseX * 0.004;
-  //   this.camera.position.y += mouseY * 0.004;
+  //   this.camera.position.x += mouseX * 0.04;
+  //   this.camera.position.y += mouseY * 0.04;
 
   //   this.camera.lookAt(this.scene.position);
   // }
