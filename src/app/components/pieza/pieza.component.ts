@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from 'src/app/services/api/api.service';
+import { ModalService } from 'src/app/services/modal/modal.service';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
@@ -18,14 +19,22 @@ export class PiezaComponent implements OnInit, AfterViewInit, OnDestroy {
   private controls: OrbitControls | undefined;
   private container: HTMLElement | null = null;
 
+  modalSwitch: boolean = false;
   idPieza: string = "";
+  errorD = "";
+  infoModal: boolean = false;
   pieza: any = [];
-
-  constructor(private apiS: ApiService, private cookieS: CookieService) { }
+  impresoras: any = [];
+  domicilio: boolean = false;
+  precio: number = 10;
+  constructor(private apiS: ApiService, private cookieS: CookieService, private modalS: ModalService) { }
 
   ngOnInit(): void {
     this.idPieza = this.cookieS.get("pieza");
     this.obtenerPieza();
+    this.obtenerImpresoras();
+    this.cambiarDomicilio();
+    this.modalS.$modal.subscribe((valor)=>{this.modalSwitch = valor});
   }
 
   ngAfterViewInit(): void {
@@ -43,7 +52,8 @@ export class PiezaComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.scene = new THREE.Scene();
-
+    let color = new THREE.Color(0x7a7b7c);
+    this.scene.background = color;
     this.camera = new THREE.PerspectiveCamera(100, this.container.clientWidth / this.container.clientHeight, 1, 1000);
     
     const loader = new STLLoader();
@@ -110,10 +120,74 @@ export class PiezaComponent implements OnInit, AfterViewInit, OnDestroy {
   private obtenerPieza(): void {
     if (this.idPieza != "") {
       this.apiS.obtenerPiezaId(this.idPieza).subscribe((response) => {
-        this.pieza = response;
+        this.pieza = response;        
         // Llamar a initThreeJS después de que la pieza se haya obtenido
         this.initThreeJS();
       });
     }
+  }
+
+  realizarPedido(){
+    if(this.cookieS.get('iniciado') == "false"){
+      this.switchModal();
+      return;
+    } 
+    const token = this.cookieS.get('iniciado');  
+    const idPieza = this.idPieza;
+    const precio = this.precio;
+    const impresora: HTMLInputElement|null = document.querySelector('#impresora');
+    const  material: HTMLInputElement|null = document.querySelector('#material');
+    const direccion: HTMLInputElement|null = document.querySelector('#direccion');    
+    const data = {idPieza: idPieza, precio: precio, material: material?.value, impresora: impresora?.value, direccion: direccion?.value, token: token};
+    if(this.domicilio){
+      if(direccion?.value != ""){
+        this.apiS.addPedido(data).subscribe((response)=>{
+          if(response){
+            this.switchInfo();
+          }else{
+            location.reload();
+          }
+        });
+      }else{
+        this.errorD = "Debes especificar una dirección";
+        setTimeout(() => {
+          this.errorD = "";
+        }, 3000);
+      }
+    }else{
+      this.apiS.addPedido(data).subscribe((response)=>{
+        if(response){
+          this.switchInfo();
+        }else{
+          location.reload();
+        }
+      });
+    }
+  }
+  
+  switchModal(): void{
+    this.modalSwitch = true;
+  }
+
+  switchInfo(){
+    this.infoModal = true;
+  }
+
+  closeModal(){
+    this.infoModal = false;
+    location.reload();
+  }
+
+  private obtenerImpresoras(): void{
+    this.apiS.obtenerImpresoras().subscribe((response)=>{
+      this.impresoras = response;
+    });
+  }
+
+  cambiarDomicilio(){
+    const check = document.querySelector('#check');
+    check?.addEventListener('input', ()=>{
+      this.domicilio = !this.domicilio;      
+    });
   }
 }

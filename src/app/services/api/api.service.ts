@@ -14,15 +14,13 @@ export class ApiService {
   constructor(private http: HttpClient, private cookieS: CookieService) { }
 
   private getHeaders(): HttpHeaders {
-    const token = this.cookieS.get('iniciado');        
+    const token = this.cookieS.get('iniciado');            
     return new HttpHeaders().set('authorization', `Bearer ${token}`);
   }
 
   private getToken(){
     return this.cookieS.get('iniciado');   
   }
-
-  
 
   login(correo: string, pass: string): Observable<any>{
     const url = `${this.apiUrl}/iniciarSesion/${correo}/${pass}`;
@@ -36,6 +34,10 @@ export class ApiService {
     const url = `${this.apiUrl}/cita`;
     const headers = this.getHeaders();
     return this.http.post(url, data, {headers});
+  }
+  addPedido(data: any): Observable<any>{
+    const url = `${this.apiUrl}/pedido`;
+    return this.http.post(url, data);
   }
   updateCita(data: any): Observable<any>{
     const url = `${this.apiUrl}/cita`;
@@ -67,5 +69,8 @@ export class ApiService {
   }
   obtenerUsuarioCorreo(correo: string): Observable<any>{
     return this.http.get(`${this.apiUrl}/usuarioCorreo/${correo}`);
+  }
+  obtenerImpresoras(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/impresoras`);
   }
 }
