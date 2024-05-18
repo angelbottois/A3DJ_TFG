@@ -7,31 +7,25 @@
 #pieza{
   width: 100%;
   height: 210px;
-  background-image: url('../../../assets/img/piezas/baston.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
   border-radius: 10px;
 }
-#pieza2{
-  width: 100%;
-  height: 210px;
-  background-image: url('../../../assets/img/piezas/bookmark.webp');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  border-radius: 10px;
+.encargar{
+  background-color: #7a7b7c;
+  /* border: 1px solid gray; */
 }
-#pieza3{
-  width: 100%;
-  height: 210px;
-  background-image: url('../../../assets/img/piezas/cactus.webp');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  border-radius: 10px;
+.descargar{
+  background-color: #53576b;
+  /* border: 1px solid gray; */
 }
-
+.encargar:hover{
+  background-color: #565657;
+}
+.descargar:hover{
+  background-color: #3e414f;
+}
 @keyframes aparecer {
     from {
       opacity: 0; /* Opacidad al principio de la animación */
