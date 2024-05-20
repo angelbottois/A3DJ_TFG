@@ -27,6 +27,9 @@ export class PiezaComponent implements OnInit, AfterViewInit, OnDestroy {
   impresoras: any = [];
   domicilio: boolean = false;
   precio: number = 10;
+  direccion: string|undefined = "";
+  impresora: string|undefined|null = "";
+  material: string|undefined = "";
   constructor(private apiS: ApiService, private cookieS: CookieService, private modalS: ModalService) { }
 
   ngOnInit(): void {
@@ -136,19 +139,24 @@ export class PiezaComponent implements OnInit, AfterViewInit, OnDestroy {
     const idPieza = this.idPieza;
     const precio = this.precio;
     const impresora: HTMLInputElement|null = document.querySelector('#impresora');
-    const  material: HTMLInputElement|null = document.querySelector('#material');
+    const material: HTMLInputElement|null = document.querySelector('#material');
     const direccion: HTMLInputElement|null = document.querySelector('#direccion');    
     const data = {idPieza: idPieza, precio: precio, material: material?.value, impresora: impresora?.value, direccion: direccion?.value, token: token};
     if(this.domicilio){
       if(direccion?.value != ""){
         this.apiS.addPedido(data).subscribe((response)=>{
           if(response){
-            this.switchInfo();
-          }else{
             location.reload();
+          }else{
+            this.infoModal = false;
+            this.errorD = "Debes especificar una dirección";
+            setTimeout(() => {
+              this.errorD = "";
+            }, 3000);
           }
         });
       }else{
+        this.infoModal = false;
         this.errorD = "Debes especificar una dirección";
         setTimeout(() => {
           this.errorD = "";
@@ -157,9 +165,13 @@ export class PiezaComponent implements OnInit, AfterViewInit, OnDestroy {
     }else{
       this.apiS.addPedido(data).subscribe((response)=>{
         if(response){
-          this.switchInfo();
-        }else{
           location.reload();
+        }else{
+          this.infoModal = false;
+          this.errorD = "Debes especificar una dirección";
+          setTimeout(() => {
+            this.errorD = "";
+          }, 3000);
         }
       });
     }
@@ -171,6 +183,16 @@ export class PiezaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   switchInfo(){
     this.infoModal = true;
+    const impresoraI: HTMLInputElement|null = document.querySelector('#impresora');
+    const direccionI: HTMLInputElement|null = document.querySelector('#direccion');
+    const materialI: HTMLInputElement|null = document.querySelector('#material');
+    this.direccion = direccionI?.value;
+    this.material = materialI?.value;
+    this.impresoras.forEach((impresora: any) => {
+      if(impresora.idImpresora == impresoraI?.value){
+        this.impresora = impresora.nombre;
+      }
+    });
   }
 
   closeModal(){

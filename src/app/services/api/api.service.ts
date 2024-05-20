@@ -67,6 +67,9 @@ export class ApiService {
   obtenerCitas(): Observable<any> {
     return this.http.get(`${this.apiUrl}/citas`);
   }
+  obtenerPedidos(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/pedidos`);
+  }
   obtenerUsuarioCorreo(correo: string): Observable<any>{
     return this.http.get(`${this.apiUrl}/usuarioCorreo/${correo}`);
   }

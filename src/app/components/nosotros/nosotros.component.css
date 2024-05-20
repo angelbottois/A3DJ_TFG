@@ -5,7 +5,7 @@
     animation: aparecer 0.6s ease-out forwards;
 }
 .primero{
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
     animation: aparecer 0.7s ease-out forwards;
 }
 .pla{

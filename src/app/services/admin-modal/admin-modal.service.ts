@@ -8,5 +8,5 @@ export class AdminModalService {
   constructor() { }
 
   $modal = new EventEmitter<any>();
-
+  $info = new EventEmitter<any>();
 }

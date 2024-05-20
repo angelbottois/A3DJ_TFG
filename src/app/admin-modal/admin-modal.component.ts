@@ -13,17 +13,25 @@ export class AdminModalComponent implements OnInit {
   estado: string = "c"; 
   citas: any[] = [];
   error: string = "";
+  pedidos: any[] = [];
 
   constructor(private modalS: AdminModalService, private apiS: ApiService) { }
 
   ngOnInit(): void {
+    this.modalS.$info.subscribe((valor)=>{this.estado = valor});
     this.obtenerCitas();
+    this.obtenerPedidos();
+  }
+
+  obtenerPedidos(){
+    this.apiS.obtenerPedidos().subscribe((response)=>{
+      this.pedidos = response;      
+    });
   }
 
   obtenerCitas(){
     this.apiS.obtenerCitas().subscribe((response)=>{
-      let citasPre = response;
-      this.citas = citasPre;
+      this.citas = response;
     });
   }
 

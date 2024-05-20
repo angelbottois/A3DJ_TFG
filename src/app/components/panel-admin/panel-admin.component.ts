@@ -11,7 +11,7 @@ import { AdminModalService } from 'src/app/services/admin-modal/admin-modal.serv
 export class PanelAdminComponent implements OnInit {
 
   modalSwitch: boolean = false;
-
+  info: string = "";
   constructor(private cookieS: CookieService, private router: Router, private modalS: AdminModalService) { }
 
   ngOnInit(): void {
@@ -19,10 +19,11 @@ export class PanelAdminComponent implements OnInit {
       this.router.navigate(["/home"]);
     }
     this.modalS.$modal.subscribe((valor)=>{this.modalSwitch = valor});
+    this.modalS.$info.subscribe((valor)=>{this.info = valor});
   }
 
-
-  switchModal(): void{
+  switchModal(info: string): void{
     this.modalSwitch = true;    
+    this.info = info;
   }
 }

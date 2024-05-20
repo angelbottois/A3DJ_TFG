@@ -2,11 +2,11 @@
     <h2>Menú administrador de A3DJ</h2>
     <div class="grid w-[100%] grid-cols-2 justify-items-center">
         <button class="text-[30px] mb-[50px] w-[700px] rounded-[10px] px-[60px] py-[60px] bg-slate-600 hover:bg-neutral-400">Administrar Planes de Socios</button>
-        <button class="text-[30px] mb-[50px] w-[700px] rounded-[10px] px-[60px] py-[60px] bg-slate-600 hover:bg-neutral-400" (click)="switchModal()">Administrar Citas</button>
+        <button class="text-[30px] mb-[50px] w-[700px] rounded-[10px] px-[60px] py-[60px] bg-slate-600 hover:bg-neutral-400" (click)="switchModal('c')">Administrar Citas</button>
         <button class="text-[30px] mb-[50px] w-[700px] rounded-[10px] px-[60px] py-[60px] bg-slate-600 hover:bg-neutral-400">Administrar Impresoras</button>
         <button class="text-[30px] mb-[50px] w-[700px] rounded-[10px] px-[60px] py-[60px] bg-slate-600 hover:bg-neutral-400">Administrar Catálogo</button>
-        <button class="text-[30px] mb-[50px] w-[700px] rounded-[10px] px-[60px] py-[60px] bg-slate-600 hover:bg-neutral-400">Administrar Clientes</button>
-        <button class="text-[30px] mb-[50px] w-[700px] rounded-[10px] px-[60px] py-[60px] bg-slate-600 hover:bg-neutral-400">Administrar Supervisores</button>
+        <button class="text-[30px] mb-[50px] w-[700px] rounded-[10px] px-[60px] py-[60px] bg-slate-600 hover:bg-neutral-400">Administrar Usuarios</button>
+        <button class="text-[30px] mb-[50px] w-[700px] rounded-[10px] px-[60px] py-[60px] bg-slate-600 hover:bg-neutral-400" (click)="switchModal('p')">Administrar Pedidos</button>
     </div>
 </div>
 <div *ngIf="modalSwitch == true">
