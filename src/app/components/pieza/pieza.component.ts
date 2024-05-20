@@ -55,7 +55,7 @@ export class PiezaComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.scene = new THREE.Scene();
-    let color = new THREE.Color(0x7a7b7c);
+    let color = new THREE.Color(0x000000);
     this.scene.background = color;
     this.camera = new THREE.PerspectiveCamera(100, this.container.clientWidth / this.container.clientHeight, 1, 1000);
     
