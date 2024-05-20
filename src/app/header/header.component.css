@@ -1,6 +1,6 @@
 header{
     display: grid;
-    width: 100%;
+    width: 1900px;
     grid-template-columns: repeat(3, auto);
     justify-content: center;
     gap: 100px;
@@ -34,4 +34,12 @@ nav ul li a{
     -webkit-transition: width 350ms ease-in-out;
     transition: width 250ms ease-in-out;
     width: 100%;
+}
+@media (max-width: 1224px) {
+    .lista{
+        display: none;
+    }
+    .menuBurger{
+        display: block;
+    }
 }

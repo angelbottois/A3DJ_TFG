@@ -8,6 +8,7 @@ import { CitasComponent } from './components/citas/citas.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 import { PiezaComponent } from './components/pieza/pieza.component';
+import { PassComponent } from './components/pass/pass.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,11 @@ const routes: Routes = [
   {
     path: 'pieza',
     component: PiezaComponent,
+  },
+  {
+    path: 'recuperar',
+    component: PassComponent,
+    pathMatch: 'full'
   },
   {
     //Any other link will be redirected to the login website

@@ -18,6 +18,7 @@ import { ApiService } from './services/api/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModalComponent } from './admin-modal/admin-modal.component';
 import { PiezaComponent } from './components/pieza/pieza.component';
+import { PassComponent } from './components/pass/pass.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { PiezaComponent } from './components/pieza/pieza.component';
     NosotrosComponent,
     AdminModalComponent,
     PiezaComponent,
+    PassComponent,
   ],
   imports: [
     BrowserModule,

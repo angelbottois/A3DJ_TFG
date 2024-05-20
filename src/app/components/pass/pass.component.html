@@ -1,0 +1,13 @@
+<div class="citas grid text-black justify-center">
+    <div class="form grid items-center w-[600px] h-[600px] px-[50px] shadow-xl rounded-[10px]">
+        <div>
+            <label for="pass" class="text-[24px] flex justify-between mb-4">Introduce la nueva contraseña</label>
+            <input type="password" name="pass" id="pass" placeholder="·······" class="rounded-[10px] p-4 w-[100%] text-[24px]">
+            <label for="passRep" class="text-[24px] flex justify-between mb-4 mt-4">Repite la contraseña</label>
+            <input type="password" name="passRep" id="passRep" placeholder="·······" class="rounded-[10px] p-4 w-[100%] text-[24px] mb-[20px]">
+            <p class="text-red-500 font-semibold text-[16px]">{{errorP}}</p>
+        </div>
+
+        <input type="submit" (click)="enviarRecuperacion()" value="Cambiar contraseña" class="text-white mt-[20px] shadow-xl cursor-pointer text-[20px] bg-blue-500 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-600">
+    </div>
+</div>

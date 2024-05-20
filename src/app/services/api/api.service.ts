@@ -43,10 +43,22 @@ export class ApiService {
     const url = `${this.apiUrl}/cita`;
     return this.http.put(url, data);
   }
+  enviarCorreoRecuperacion(correo: string): Observable<any>{
+    const url = `${this.apiUrl}/recuperar/${correo}`;
+    return this.http.get(url);
+  }
+  enviarNuevaPass(data: any): Observable<any>{
+    const url = `${this.apiUrl}/password`;
+    return this.http.put(url, data);
+  }
   esAdmin(): Observable<any>{
     const url = `${this.apiUrl}/admin`;
     const data = {token: this.getToken()};
     return this.http.post(url, data);
+  }
+  obtenerClienteToken(token: string){
+    const url = `${this.apiUrl}/clienteToken/${token}`;
+    return this.http.get(url);
   }
   obtenerHoras(fecha: any): Observable<any>{
     const url = `${this.apiUrl}/horasDisp/${fecha}`;    

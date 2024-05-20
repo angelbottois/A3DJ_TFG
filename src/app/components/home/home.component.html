@@ -3,7 +3,7 @@
     <!-- <p class="segundo text-center text-[20px] mt-[20px]"></p> -->
     <div class="buscador grid justify-items-center mt-[30px] mb-[50px]">
         <!-- <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"></label> -->
-        <div class="relative w-[50%]">
+        <div class="barra relative w-[50%]">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
@@ -15,7 +15,7 @@
     </div>
     <div class="ejemplos grid justify-items-center mb-[30px]">
         <h2 class="text-[20px] mb-[30px]"><u>Piezas más populares de los últimos 30 días</u></h2>
-        <div class="grid grid-cols-4 gap-[30px]">
+        <div class="piezas grid grid-cols-4 gap-[30px]">
             <div *ngFor="let pieza of listaPiezas" class="w-[300px] h-[300px] rounded-[10px] grid justify-items-center">
                 <div id="pieza" class="shadow-xl" style="background-image: url(../../../assets/img/piezas/{{pieza.img}});"></div>
                 <div class="grid grid-cols-2 h-[100%] gap-3">

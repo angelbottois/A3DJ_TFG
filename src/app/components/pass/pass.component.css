@@ -1,0 +1,38 @@
+.citas{
+    animation: aparecer 0.5s ease-out forwards;
+}
+.modal{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(104, 104, 104, 0.8);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+}
+.form{
+    background-color: #a39b7e;
+}
+#fecha{
+    background-color: #e2c99f;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    padding: 15px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    border-radius: 10px;
+}
+@keyframes aparecer {
+    from {
+      opacity: 0; /* Opacidad al principio de la animación */
+    }
+    to {
+      opacity: 1; /* Opacidad al final de la animación */
+    }
+  }

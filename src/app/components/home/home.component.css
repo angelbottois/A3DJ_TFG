@@ -60,3 +60,14 @@
     opacity: 1; /* Opacidad al final de la animación */
   }
 }
+@media (max-width: 1224px) {
+  .piezas{
+    grid-template-columns: repeat(2, auto);
+  }
+  .ejemplos{
+    margin-bottom: 100px;
+  }
+  .barra{
+    width: 20%;
+  }
+}

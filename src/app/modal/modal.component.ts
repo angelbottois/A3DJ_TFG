@@ -3,6 +3,8 @@ import { ModalService } from '../services/modal/modal.service';
 import { ApiService } from '../services/api/api.service';
 import { Cliente, Supervisor } from '../interfaces/_interfacesUsuario';
 import { CookieService } from 'ngx-cookie-service';
+import { core } from '@angular/compiler';
+import { rejects } from 'assert';
 
 @Component({
   selector: 'app-modal',
@@ -13,33 +15,15 @@ export class ModalComponent implements OnInit {
 
   estado: string = "l"; 
   activo = false;
+  existe: boolean = false;
   iniciado: string = "";
+  registrado: boolean = false;
+  enviado: boolean = false;
+  error: string = "";
   passError: string = "";
   nameError: string = "";
   apeError: string = "";
   mailError: string = "";
-
-  // currentUserC :Cliente = {
-  //   idUsuario: "",
-  //   correo: "",
-  //   nombre: "",
-  //   apellidos: "",
-  //   fotoPerfil: "",
-  //   activo: false,
-  //   hashPass: "",
-  //   planSocios: "",
-  //   planActivo: false
-  // }
-  // currentUserS :Supervisor = {
-  //   idUsuario: "",
-  //   correo: "",
-  //   nombre: "",
-  //   apellidos: "",
-  //   fotoPerfil: "",
-  //   activo: false,
-  //   hashPass: "",
-  //   administrador: false
-  // }
 
   constructor(private modalS: ModalService, private apiS: ApiService, private cookieS: CookieService) { }
 
@@ -64,11 +48,9 @@ export class ModalComponent implements OnInit {
         if(apellidos.value != ""){
           if(correo.value != ""){
             let data = JSON.stringify({nombre: nombre.value, apellidos: apellidos.value, pass: pass.value, correo: correo.value});
-      
             this.apiS.register(data).subscribe(
               (response) => {
-                console.log(response);
-                
+                this.registrado = response;
               }
             );
           }else{
@@ -103,7 +85,6 @@ export class ModalComponent implements OnInit {
               this.borrarValorError();
             } else {
               await this.comprobarUsuarioActivo(correo.value);
-              
               if (this.activo) {
                 this.cookieS.set("iniciado", response);
                 location.reload();
@@ -114,7 +95,6 @@ export class ModalComponent implements OnInit {
             }
           } catch (error) {
             console.error('Error durante el inicio de sesión', error);
-            // Maneja el error si es necesario
           }
         } else {
           this.passError = "Contraseña no válida";
@@ -125,6 +105,39 @@ export class ModalComponent implements OnInit {
         this.borrarValorError();
       }
     }
+  }
+
+  async enviarCorreoRecuperacion(){
+    const correo: HTMLInputElement|null = document.querySelector('#emailP');
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(correo?.value && correo?.value != ""){
+        if(regex.test(correo?.value)){          
+          await this.comprobarUsuarioExiste(correo.value);
+          if(this.existe){
+            this.cookieS.set("recuperacion", correo.value);
+            this.apiS.enviarCorreoRecuperacion(correo.value).subscribe((response)=>{              
+              if(response == null){
+                this.enviado = true;
+              }
+            });
+          }else{
+            this.error = "Este correo no está asociado a ninguna cuenta";
+            setTimeout(() => {
+              this.error = "";
+            }, 3000);
+          }
+        }else{
+          this.error = "Correo no válido";
+          setTimeout(() => {
+            this.error = "";
+          }, 3000);
+        }
+    }else{
+      this.error = "Por favor introduce el correo asociado a tu cuenta";
+      setTimeout(() => {
+        this.error = "";
+      }, 3000);
+    } 
   }
   
   comprobarUsuarioActivo(correo: string): Promise<void> {
@@ -139,6 +152,19 @@ export class ModalComponent implements OnInit {
           reject(error);
         }
       );
+    });
+  }
+
+  comprobarUsuarioExiste(correo: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.apiS.obtenerUsuarioCorreo(correo).subscribe((response)=>{
+        response != null ? this.existe = true : null ;
+        resolve();
+      },
+      (error) => {
+        console.error('Error al obtener el estado del usuario', error);
+        reject(error);
+      });
     });
   }
 

@@ -1,19 +1,22 @@
-<div class="grid grid-cols-2 px-[200px]">
-    <div id="avatar" class="bg-slate-50 rounded-[10px] w-[400px] h-[650px]">
-        
-    </div>
-    <div class="bg-slate-400 rounded-[10px] grid grid-cols-2">
-        <div>
-            <h2>Nombre:</h2>
-            <h2>Apellidos:</h2>
-            <h2>Correo asociado:</h2>
-            <button class="mt-[20px] shadow-xl bg-blue-500 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-600">Cambiar foto de perfil</button>
+<div class="grid justify-items-center px-[200px]">
+    <div class="perfil w-[50%] p-4 rounded-[10px] grid">
+        <div class="grid grid-cols-2">
+            <div>
+                <h2>Nombre: <u>{{nombre}}</u></h2>
+                <h2>Apellidos: <u>{{apellidos}}</u></h2>
+                <h2>Correo asociado: <u>{{correo}}</u></h2>
+                <h2>Plan de socio: <u>{{plan}}</u></h2>
+            </div>
+            <div class="grid justify-end">
+                <div class="w-[200px] h-[200px]" id="imagen">
+
+                </div>
+            </div>
         </div>
-        <nav>
-            <ul>
-                <li>Datos personales</li>
-                <li>Historial de pedidos</li>
-            </ul>
-        </nav>
+        <div class="grid grid-cols-3 gap-[40px]">
+            <button class="mt-[20px] shadow-xl bg-blue-500 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-600">Cambiar foto de perfil</button>
+            <button class="mt-[20px] shadow-xl bg-blue-500 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-600">Ver historial de pedidos</button>
+            <button class="mt-[20px] shadow-xl bg-blue-500 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-600">Ver citas pendientes</button>
+        </div>
     </div>
 </div>
