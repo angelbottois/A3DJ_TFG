@@ -34,6 +34,8 @@ export class HomeComponent implements OnInit {
     this.apiS.obtenerPiezasPopulares().subscribe((response)=>{
       if(response){        
         this.listaPiezas = response;
+        console.log(response);
+        
       }
     });
   }
