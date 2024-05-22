@@ -49,11 +49,11 @@
             </div>
             <div class="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8">
                 <p class="text-[25px] font-medium text-gray-900 dark:text-white">¿Desea confirmar el pedido?</p>
-                <p>Pieza: {{pieza['nombre']}}</p>
-                <p>Impresora: {{impresora}}</p>
-                <p>Material: {{material}}</p>
-                <p>Dirección: {{direccion}} (en caso de incluir)</p>
-                <p>Precio: {{precio}}</p>
+                <p>Pieza: <u> {{pieza['nombre']}}</u></p>
+                <p>Impresora: <u>{{impresora}}</u></p>
+                <p>Material: <u>{{material}}</u></p>
+                <p>Dirección: <u> {{direccion}}</u> (en caso de incluir)</p>
+                <p>Precio: <u>{{precio}}</u></p>
                 <button class="bg-green-700 hover:bg-green-800 p-4 rounded-[10px]" (click)="realizarPedido()">Confirmar</button>
             </div>
         </div>

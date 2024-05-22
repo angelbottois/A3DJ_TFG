@@ -50,7 +50,12 @@ export class ModalComponent implements OnInit {
             let data = JSON.stringify({nombre: nombre.value, apellidos: apellidos.value, pass: pass.value, correo: correo.value});
             this.apiS.register(data).subscribe(
               (response) => {
-                this.registrado = response;
+                if(response){
+                  this.registrado = response;
+                }else{
+                  this.mailError = "Este correo ya está asociado a una cuenta";
+                  this.borrarValorError();
+                }
               }
             );
           }else{

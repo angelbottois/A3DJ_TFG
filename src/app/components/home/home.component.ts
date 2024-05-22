@@ -21,13 +21,13 @@ export class HomeComponent implements OnInit {
     }  
   }
 
-  info(){
-    document.querySelector('.info')?.classList.add('hidden')
-  }
-
   closeModal(){
     this.cookieS.set("allowCookies", "true");
     location.reload();
+  }
+  
+  info(){
+    document.querySelector('.info')?.classList.add('hidden')
   }
 
   obtenerPiezasPopulares(){

@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
     this.renderer.setSize(300, 250);
     logo?.appendChild(this.renderer.domElement);
   
-    // Cargar la fuente
+    // Cargar la fuente del proyecto
     const fontLoader = new FontLoader();
     fontLoader.load('../../assets/font/Pixellari_Medium.json', (font) => {
       const textGeometry = new TextGeometry('A3DJ', {
@@ -75,14 +75,14 @@ export class HeaderComponent implements OnInit {
   
         this.logoScene.add(textMesh);
   
-        // Centramos el texto
+        // Centrar el texto
         textMesh.position.x = centerOffset;
         textMesh.position.y = 0;
         textMesh.position.z = 0;
   
         this.camera.position.z = 5;
   
-        // Edges para el texto
+        // Bordes para el texto
         const edgesGeometry = new THREE.EdgesGeometry(textGeometry);
         const edgesMaterial = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 2 });
         const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);

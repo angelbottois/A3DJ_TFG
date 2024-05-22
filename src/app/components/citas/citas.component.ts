@@ -36,7 +36,7 @@ export class CitasComponent implements OnInit {
   fecha: any = null;
   errorM: string = "";
   errorF: string = "";
-
+  info: string = "";
   constructor(private apiS: ApiService, private modalS: ModalService, private cookieS: CookieService) { }
 
   ngOnInit(): void {
@@ -105,9 +105,11 @@ export class CitasComponent implements OnInit {
           let data = {fecha: fecha.value, detalles: motivo.value, hora: hora?.value};
           this.apiS.addCita(data).subscribe((response)=>{            
             if(response){
+              this.info = "La cita se envió correctamente. Ahora esta pendiente de aprobación.";
               this.switchInfo();
             }else{
-              location.reload();
+              this.info = "Debes tener un plan de socios activo para poder reservar citas.";
+              this.switchInfo();
             }
           });
         }else{

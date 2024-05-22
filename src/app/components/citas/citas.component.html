@@ -16,7 +16,7 @@
                 <option *ngFor="let hora of horas" value="{{hora.id}}">{{hora.hora}}</option>
             </select>
         </div>
-        <input type="submit" (click)="insertarCita()" value="Enviar solicitud" class="text-white mt-[20px] shadow-xl cursor-pointer text-[20px] bg-blue-500 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-600">
+        <input type="submit" (click)="insertarCita()" value="Enviar solicitud" class="text-white mt-[20px] shadow-xl cursor-pointer text-[20px] bg-blue-700 rounded-[10px] px-[25px] py-[15px] hover:bg-blue-800">
     </div>
 </div>
 <div *ngIf="modalSwitch == true">
@@ -31,7 +31,7 @@
                 </button>
             </div>
             <div class="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8">
-                <p class="text-[25px] font-medium text-gray-900 dark:text-white">La cita se envió correctamente. Ahora esta pendiente de aprobación.</p>
+                <p class="text-[25px] font-medium text-gray-900 dark:text-white">{{info}}</p>
             </div>
         </div>
     </div>
