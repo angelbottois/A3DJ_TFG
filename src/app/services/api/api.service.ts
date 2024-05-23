@@ -16,7 +16,11 @@ export class ApiService {
     const token = this.cookieS.get('iniciado');            
     return new HttpHeaders().set('authorization', `Bearer ${token}`);
   }
-
+  addCita(data: any): Observable<any>{
+    const url = `${this.apiUrl}/cita`;
+    const headers = this.getHeaders();
+    return this.http.post(url, data, {headers});
+  }
   private getToken(){
     return this.cookieS.get('iniciado');   
   }
@@ -29,11 +33,11 @@ export class ApiService {
     const url = `${this.apiUrl}/cliente`;    
     return this.http.post(url, data)
   }
-  addCita(data: any): Observable<any>{
-    const url = `${this.apiUrl}/cita`;
-    const headers = this.getHeaders();
-    return this.http.post(url, data, {headers});
-  }
+  // addCita(data: any): Observable<any>{
+  //   const url = `${this.apiUrl}/cita`;
+  //   const headers = this.getHeaders();
+  //   return this.http.post(url, data, {headers});
+  // }
   addPedido(data: any): Observable<any>{
     const url = `${this.apiUrl}/pedido`;
     return this.http.post(url, data);

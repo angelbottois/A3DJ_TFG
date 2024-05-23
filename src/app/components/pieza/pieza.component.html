@@ -3,7 +3,7 @@
         <div class="w-[100%] h-[300px] shadow-xl bg-slate-50 rounded-[10px]" id="pieza"></div>
         <div class="grid grid-cols-1">
             <p class="nombre text-[50px]">{{pieza.nombre}}</p>
-            <button class="descargar w-[100%] px-[25px] py-[15px] shadow-xl text-[18px] font-medium rounded-b-[10px]">Descargar .stl</button>
+            <button class="descargar w-[100%] px-[25px] py-[15px] shadow-xl text-[18px] font-medium rounded-b-[10px]"><a [href]="'../../../assets/stl/' + pieza['stl']" download>Descargar .stl</a></button>
         </div>
     </div>
     <div class="cont w-[60%] h-[500px] rounded-[10px] grid justify-items-center pt-[25px]">

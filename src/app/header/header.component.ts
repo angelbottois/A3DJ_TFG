@@ -1,10 +1,10 @@
 import { ApiService } from './../services/api/api.service';
 import { Component, OnInit } from '@angular/core';
-import * as THREE from 'three';
 import { ModalService } from '../services/modal/modal.service';
 import { SesionService } from '../services/sesion/sesion.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';

@@ -16,18 +16,18 @@
                 <div id="pieza" class="shadow-xl" style="background-image: url(../../../assets/img/piezas/{{pieza.img}});"></div>
                 <div class="grid grid-cols-2 h-[100%] gap-3">
                     <button class="encargar shadow-xl p-4 text-[18px] font-medium rounded-[10px]" (click)="persistirPieza(pieza.idPieza)"><a href="pieza">Encargar</a></button>
-                    <button class="descargar shadow-xl p-4 text-[18px] font-medium rounded-[10px]"><a href="../../../assets/stl/{{pieza.stl}}" download>Descargar .stl</a></button>
+                    <button class="descargar shadow-xl p-4 text-[18px] font-medium rounded-[10px]"><a [href]="'../../../assets/stl/' + pieza.slt" download>Descargar .stl</a></button>
                 </div>
             </div>
         </div>
         <div class="paginacion grid grid-cols-7 my-[30px] gap-[10px]">
-            <button><img src="../../../assets/img/icons/l.svg" alt="arrow" width="15px"></button>
-            <div class="bg-slate-300 w-[25px] h-[25px] rounded-[4px] text-center">1</div>
-            <div class="bg-slate-300 w-[25px] h-[25px] rounded-[4px] text-center">2</div>
-            <div class="bg-slate-300 w-[25px] h-[25px] rounded-[4px] text-center">3</div>
+            <button><img src="../../../assets/img/icons/l.svg" alt="arrow" width="15px" (click)="retroPag()"></button>
+            <div class="bg-slate-700 cursor-pointer w-[25px] h-[25px] rounded-[4px] text-center" (click)="retroPag()">1</div>
+            <div class="bg-slate-700 cursor-pointer w-[25px] h-[25px] rounded-[4px] text-center" (click)="avazarPag()">2</div>
+            <div class="bg-slate-700 cursor-pointer w-[25px] h-[25px] rounded-[4px] text-center">3</div>
             <p class="text-center">...</p>
-            <div class="bg-slate-300 w-[25px] h-[25px] rounded-[4px] text-center">25</div>
-            <button><img src="../../../assets/img/icons/r.svg" alt="arrow" width="15px"></button>
+            <div class="bg-slate-700 cursor-pointer w-[25px] h-[25px] rounded-[4px] text-center">25</div>
+            <button><img src="../../../assets/img/icons/r.svg" alt="arrow" width="15px" (click)="avazarPag()"></button>
         </div>
     </div>
 </div>

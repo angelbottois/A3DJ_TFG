@@ -11,12 +11,13 @@ import { ApiService } from 'src/app/services/api/api.service';
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
-export class PerfilComponent implements OnInit, AfterViewInit {
+export class PerfilComponent implements OnInit {
 
   nombre: string = "";
   apellidos: string = "";
   correo: string = "";
-  plan: any = "";
+  plan: string = "";
+  img: string = "";
 
   constructor(private cookieS: CookieService, private router: Router, private apiS: ApiService) { }
 
@@ -27,21 +28,20 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     this.obtenerDatosUsuario();
   }
 
-  obtenerDatosUsuario(){
+  async obtenerDatosUsuario(){
     this.apiS.obtenerClienteToken(this.cookieS.get('iniciado')).subscribe((response: any)=>{
       this.nombre = response.nombre;
       this.apellidos = response.apellidos;
       this.correo = response.correo;
+      this.img = response.img;
       if(response.plan == null){
         this.plan = "Ninguno";
       }else{
         this.plan = response.planSocio;
       }
-    });
-  }
-
-  ngAfterViewInit(): void {
     this.createScene();
+
+    });
   }
 
   private createScene(): void {
@@ -68,9 +68,8 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     // Crear la geometría del cubo
     const geometry = new THREE.BoxGeometry();
 
-    // Cargar la textura
     const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load('../../../assets/img/def.webp'); // Cambia la ruta a tu imagen
+    const texture = textureLoader.load(`../../../assets/img/` + this.img); 
 
     // Crear el material con la textura
     const material = new THREE.MeshBasicMaterial({ map: texture });

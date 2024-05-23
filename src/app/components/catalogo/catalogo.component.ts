@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/services/api/api.service';
 export class CatalogoComponent implements OnInit {
 
   listaPiezas: any = [];
+  allPiezas: any = [];
 
   constructor(private apiS: ApiService, private cookieS: CookieService) { }
 
@@ -19,9 +20,27 @@ export class CatalogoComponent implements OnInit {
 
   obtenerPiezas(){
     this.apiS.obtenerPiezas().subscribe((response)=>{
-      console.log(response);
-      this.listaPiezas = response;
+      this.allPiezas = response;
+      this.mostrarPiezas();
     });
+  }
+
+  mostrarPiezas(){
+    for(let i = 0; i < 4; i++){
+      this.listaPiezas[i] = this.allPiezas[i];
+    }
+  }
+
+  avazarPag(){
+    for(let i = 0; i < 4; i++){
+      this.listaPiezas[i] = this.allPiezas[i+4];
+    }
+  }
+
+  retroPag(){
+    for(let i = 0; i < 4; i++){
+      this.listaPiezas[i] = this.allPiezas[i];
+    }
   }
 
   persistirPieza(id: string){

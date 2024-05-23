@@ -33,6 +33,9 @@ export class PiezaComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private apiS: ApiService, private cookieS: CookieService, private modalS: ModalService) { }
 
   ngOnInit(): void {
+    if(this.cookieS.get('iniciado') == "false"){
+      this.switchModal();
+    }
     this.idPieza = this.cookieS.get("pieza");
     this.obtenerPieza();
     this.obtenerImpresoras();
@@ -124,6 +127,7 @@ export class PiezaComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.idPieza != "") {
       this.apiS.obtenerPiezaId(this.idPieza).subscribe((response) => {
         this.pieza = response;        
+        
         // Llamar a initThreeJS después de que la pieza se haya obtenido
         this.initThreeJS();
       });
@@ -132,6 +136,7 @@ export class PiezaComponent implements OnInit, AfterViewInit, OnDestroy {
 
   realizarPedido(){
     if(this.cookieS.get('iniciado') == "false"){
+      this.infoModal = false;
       this.switchModal();
       return;
     } 
